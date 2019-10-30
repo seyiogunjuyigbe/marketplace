@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-import { DB_URL } from '../config/constants';
+import {DB_URL}  from '../config/constants';
 class Database {
   constructor() {
     this._connect();

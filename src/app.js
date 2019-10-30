@@ -17,7 +17,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.use(methodOverride("_method"));
 
+const userRoutes = require("./routes/userRoutes");
 
+
+app.use("/user", userRoutes);
 
 //PASSPORT CoNFIG
 // app.use(require("express-session")({
@@ -43,6 +46,10 @@ app.use(methodOverride("_method"));
 //     next();
 // })
 
+
+app.get("/", (req,res)=>{
+    res.render("index")
+})
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, process.env.IP, ()=>{
