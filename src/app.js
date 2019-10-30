@@ -1,21 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var passportLocalMongoose = require('passport-local-mongoose');
-var methodOverride = require('method-override');
-var flash = require("connect-flash");
-var request = require("request");
+const express = require('express');
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const passportLocalMongoose = require('passport-local-mongoose');
+const methodOverride = require('method-override');
+const flash = require("connect-flash");
+const request = require("request");
+const db = require('./database/db');
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/marketplace', {
-    useNewUrlParser: true, 
-    useFindAndModify: false, 
-    useCreateIndex:true,
-    useUnifiedTopology: true
-    });
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
