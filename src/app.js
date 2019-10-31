@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
-
+import initRoutes from "./routes/userRoutes"
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,10 +17,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.use(methodOverride("_method"));
 
-const userRoutes = require("./routes/userRoutes");
 
-
-app.use("/user", userRoutes);
 
 //PASSPORT CoNFIG
 // app.use(require("express-session")({
@@ -47,9 +44,11 @@ app.use("/user", userRoutes);
 // })
 
 
-app.get("/", (req,res)=>{
-    res.render("index")
-})
+// app.get("/", (req,res)=>{
+//     // res.send("Index route")
+//     res.render("index")
+// })
+initRoutes(app)
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, process.env.IP, ()=>{

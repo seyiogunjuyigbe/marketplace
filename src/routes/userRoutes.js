@@ -1,8 +1,6 @@
-const express = require('express');
-const router = express.Router({mergeParams: true});
 
-router.get("/", (req,res)=>{
-    res.send("A user")
-})
+import renderLandingPage from "../middlewares/renderLandingPage"
 
-module.exports = router;
+export const initRoutes = app =>{
+    app.get("/", renderLandingPage);
+}
