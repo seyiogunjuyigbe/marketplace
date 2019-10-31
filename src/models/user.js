@@ -6,9 +6,28 @@ const userSchema = new Schema({
     first_name: String,
     last_name: String,
     phone_number: String, 
+    avatar_url: String,
     email: String,
     isSeller: Boolean,
     isBuyer: Boolean,
-    messages: []
+    messages: [],
+    favourites: [],
+    purchases: [],
+    seller_profile: {
+        skills: [{
+            name:String,
+            level: String}],
+        languages: [{
+            name:String,
+            level: String}],
+        description: {
+            title:String,
+            description: String,
+            rate: Number
+            }
+
+
+    }
+
 })
 module.exports = mongoose.model("User", userSchema)

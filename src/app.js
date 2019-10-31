@@ -9,11 +9,15 @@ const methodOverride = require('method-override');
 const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
-import initRoutes from "./routes/userRoutes"
+import {initRoutes} from "./routes/userRoutes"
+import path from 'path';
 
-app.set("view engine", "ejs");
+
+app.set('views', path.join(__dirname, 'views')) // Redirect to the views directory inside the src directory
+app.use(express.static(path.join(__dirname, '../public'))); // load local css and js files
+app.set('view engine', 'ejs'); 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.use(methodOverride("_method"));
 
