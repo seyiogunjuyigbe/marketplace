@@ -2,10 +2,12 @@
   "name": "marketplace",
   "version": "1.0.0",
   "description": "Marketplace",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/app.js"
+    "start": "node bin/dev",
+    "build": "mkdir dist && babel src -s -d dist",
+    "dev": "nodemon --exec babel-node -- ./src/app.js",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -20,8 +22,10 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.7",
@@ -32,7 +36,15 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
     "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "chai-http": "^4.3.0",
     "nodemon": "^1.19.4"
   }
