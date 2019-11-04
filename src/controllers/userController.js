@@ -10,6 +10,8 @@ export const createUser = async(req,res) =>{
           return result;
             }
             console.log(newUser)
+            return res.status(201).send(newUser)
+            
         })
     }
     catch(err){
