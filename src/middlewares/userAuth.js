@@ -12,27 +12,27 @@ User.register(thisUser, req.body.password, function(err,user){
         return res.status(500).send("Server Error");
     }
         passport.authenticate("local")(req, res, function(){
-            console.log(user);
-            return res.status(200).send("Successfully registered")
+            console.log("User registered");
+            return res.status(200).render("dashboard", {user:user})
            })
 
 })
 }
 
 //Login
-export const loginUser = (req,res)=>{
+export const loginUser = 
     passport.authenticate("local", {
-        successRedirect:'/user/dashboard',
+        successRedirect:'/user/login/success',
         failureRedirect: "/user/login"
-    }), ()=>{
-    console.log("Logged In!")
-    }
-}
+    }) 
+
+
 
 //logout Middleware
 export const logoutUser = (req,res)=>{
     req.logout();
-    res.redirect("/user/login")
+    console.log("Logged Out")
+    res.redirect("/user/login");
 }
 
 

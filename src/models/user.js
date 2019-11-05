@@ -4,10 +4,10 @@ const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
 const userSchema = new Schema({
     username: String,
-    first_name: String,
-    last_name: String,
-    phone_number: String, 
-    avatar_url: String,
+    firstName: String,
+    lastName: String,
+    phoneNumber: String, 
+    avatarUrl: String,
     email: String,
     isSeller: Boolean,
     isBuyer: Boolean,
@@ -28,7 +28,11 @@ const userSchema = new Schema({
             }
 
 
-    }
+    },
+    services:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Service"
+    }]
 
 })
 userSchema.plugin(passportLocalMongoose);
