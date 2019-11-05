@@ -1,0 +1,55 @@
+<% include ./partials/header.ejs %>
+<div class="jumbotron">
+<h2>Add a Service</h2>
+</div> 
+
+<div class="container">
+    <form action="/user/<%=user._id%>/services/new" method="POST">
+    <input class="form-control" type="text" name="service[title]" placeholder="Title" id="" required>
+    <textarea class="form-control" name="service[description]" id="" cols="30" rows="10" required></textarea>
+    <select class="form-control" name="category" id="" required>
+            <option value="">-Category-</option>
+        <option value="Lorem">Lorem</option>
+        <option value="Ipsum">Ipsum</option>
+    </select>
+
+<input class="form-control" type="submit">
+    <!-- createdBy: String,
+    createdAt : Date,
+    title: String,
+    description: String,
+    category: String,
+    subCategory: String,
+    tags: [],
+    decription: String,
+    faqs:[{
+        question: String,
+        answer: String
+    }],
+    isPrivate: Boolean,
+    price: Number,
+    currency: {type:String, default: "USD"},
+    deliveryTime: Number,
+    revisionCount: String,
+    extras: [{
+        title: String,
+        description: String,
+        cost: Number
+    }],
+    requirements: [{
+        description: String,
+        type: String,
+        isMandatory: Boolean
+    }],
+    thumbnails: [{
+        src: String,
+        type: String
+    }],
+    videos: [{
+        src: String,
+        type: String
+    }],
+    status: String -->
+</form>
+</div>
+<% include ./partials/footer.ejs %>
