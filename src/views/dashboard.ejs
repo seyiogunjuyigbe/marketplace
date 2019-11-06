@@ -1,0 +1,11 @@
+<% include ./partials/header.ejs %>
+<div class="jumbotron">
+
+<h3>Hey, <%=user.firstName%> is your dashboard</h3>
+</div>
+<a href="/user/<%=user._id%>/services/new">Create New Service</a>
+<a href="/user/<%=user._id%>/services/all">All Services</a>
+
+
+
+<% include ./partials/footer.ejs %>

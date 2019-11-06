@@ -1,0 +1,106 @@
+<% include ./partials/header.ejs %>
+<div class="jumbotron">
+<h2>Add a Service</h2>
+</div> 
+
+<div class="container">
+    <form action="/user/<%=user._id%>/services/new" method="POST">
+    <input class="form-control" type="text" name="service[title]" placeholder="Title" id="" required>
+    <textarea class="form-control" name="service[description]" id="" cols="30" rows="10" required></textarea>
+    <div class="form-group">
+    <select class="form-control" name="category" id="category" required>
+            <option value="">-Category-</option>
+        <option value="Lorem" id="lorem">Lorem</option>
+        <option value="Ipsum" id="ipsum">Ipsum</option>
+    </select>
+    <div id="sub">
+
+    </div>
+    </div>
+    <input class="form-control" type="text" name="tags" placeholder="Separate tags with commas" id="">
+
+
+<input class="form-control" type="submit">
+    <!-- 
+  
+    tags: [],
+    faqs:[{
+        question: String,
+        answer: String
+    }],
+    isPrivate: Boolean,
+    price: Number,
+    currency: {type:String, default: "USD"},
+    deliveryTime: Number,
+    revisionCount: String,
+    extras: [{
+        title: String,
+        description: String,
+        cost: Number
+    }],
+    requirements: [{
+        description: String,
+        type: String,
+        isMandatory: Boolean
+    }],
+    thumbnails: [{
+        src: String,
+        type: String
+    }],
+    videos: [{
+        src: String,
+        type: String
+    }],
+    status: String -->
+</form>
+</div>
+<script>
+    const sub = document.querySelector("#sub")
+    const loremSubCategories = ['loremSubCat1', 'loremSubCat2', 'loremSubCat3', 'loremSubCat4'];
+    const ipsumSubCategories = ['ipsumSubCat1', 'ipsumSubCat2', 'ipsumSubCat3', 'ipsumSubCat4']
+
+const loremSubCat = document.createElement('select');
+loremSubCat.setAttribute("class", "form-control");
+
+// var blank = '<option value="">-Category-</option>'
+// const categSort = (categ,catArr) =>{
+//     catArr.forEach((cat)=>{
+// blank+=`<option value="${cat}" id="">${cat}</option>`
+// let holder = document.createElement("select");
+// holder.setAttribute("class", "form-control");
+
+// })
+// }
+
+loremSubCat.innerHTML = `
+        <option value="">-Subcategory-</option>
+        <option value="loremSubCat1" id="">loremSubCat1</option>      
+        <option value="loremSubCat2" id="">loremSubCat2</option>
+`
+loremSubCat.setAttribute("name", "subCategory");
+const ipsumSubCat = document.createElement('select');
+ipsumSubCat.setAttribute("class", "form-control")
+ipsumSubCat.innerHTML = `
+        <option value="">-Category-</option>
+        <option value="ipsumSubCat1" id="">ipsumSubCat1</option>
+        <option value="ipsumSubCat2" id="">ipsumSubCat2</option>
+`
+ipsumSubCat.setAttribute("name", "subCategory");
+
+const selCategory = document.querySelector("#category");
+selCategory.addEventListener("change", ()=>{
+    if(selCategory.value == "Lorem"){
+       sub.innerHTML = ""
+        sub.appendChild(loremSubCat);
+        
+        
+    } else if(selCategory.value == "Ipsum"){
+       sub.innerHTML = ""
+        sub.appendChild(ipsumSubCat);
+
+    } else if(selCategory.value = ""){
+        sub.innerHTML = "";
+    }
+})
+</script>
+<% include ./partials/footer.ejs %>
