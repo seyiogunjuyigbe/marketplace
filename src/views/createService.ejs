@@ -73,11 +73,11 @@ loremSubCat.setAttribute("class", "form-control");
 // }
 
 loremSubCat.innerHTML = `
-        <option value="">-Category-</option>
+        <option value="">-Subcategory-</option>
         <option value="loremSubCat1" id="">loremSubCat1</option>      
         <option value="loremSubCat2" id="">loremSubCat2</option>
 `
-
+loremSubCat.setAttribute("name", "subCategory");
 const ipsumSubCat = document.createElement('select');
 ipsumSubCat.setAttribute("class", "form-control")
 ipsumSubCat.innerHTML = `
@@ -85,18 +85,18 @@ ipsumSubCat.innerHTML = `
         <option value="ipsumSubCat1" id="">ipsumSubCat1</option>
         <option value="ipsumSubCat2" id="">ipsumSubCat2</option>
 `
+ipsumSubCat.setAttribute("name", "subCategory");
 
 const selCategory = document.querySelector("#category");
 selCategory.addEventListener("change", ()=>{
     if(selCategory.value == "Lorem"){
        sub.innerHTML = ""
         sub.appendChild(loremSubCat);
-        loremSubCat.setAttribute("name", "subCategory")
+        
         
     } else if(selCategory.value == "Ipsum"){
        sub.innerHTML = ""
         sub.appendChild(ipsumSubCat);
-        ipsumSubCat.setAttribute("name", "subCategory")
 
     } else if(selCategory.value = ""){
         sub.innerHTML = "";

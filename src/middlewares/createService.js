@@ -5,6 +5,7 @@ export const renderServicePage = (req,res)=>{
         if(err){
             return res.status(404).send("User not found")
         } else{
+
            return res.status(201).render("createService", {user:user})
         }
     })
