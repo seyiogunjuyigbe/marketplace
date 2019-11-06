@@ -23,11 +23,21 @@ export const createService = (req,res)=>{
         service.createdBy = user._id;
         user.services.push(service);
         user.save()
-        return res.status(200).send(user)
+        return res.status(200).send(service)
     }
     })
 }
     })
 
 
+}
+
+export const seeAllServices = (req,res)=>{
+    User.findById(req.user._id, (err,user)=>{
+        if(err){
+            return res.status(404).send("User not found")
+        } else{
+            return res.status(200).render("allServices", {user:user})
+        }
+    })
 }

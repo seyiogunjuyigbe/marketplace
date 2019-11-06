@@ -22,7 +22,7 @@ User.register(thisUser, req.body.password, function(err,user){
 //Login
 export const loginUser = 
     passport.authenticate("local", {
-        successRedirect:'/user/login/success',
+        successRedirect:'/user/profile',
         failureRedirect: "/user/login"
     }) 
 
