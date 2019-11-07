@@ -26,8 +26,6 @@ const userSchema = new Schema({
             description: String,
             rate: Number
             }
-
-
     },
     services:[{
         type: mongoose.Schema.Types.ObjectId,

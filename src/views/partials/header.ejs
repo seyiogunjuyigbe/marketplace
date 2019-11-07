@@ -29,8 +29,16 @@
                               <a class="nav-link" href="/user/logout">Logout</a>
                             </li> 
                             <li class="nav-item">
-                                  <span class="nav-link">Signed in as <%= user.username %></a>
-                              </span>
+                              <small> Signed in as <%= user.username %>
+                               <% if(user.isBuyer == true){ %>
+                                  <span class="badge badge-info">Buyer</span>
+                              <%  } %>
+                              <% if(user.isSeller == true){ %>
+                                <span class="badge badge-success">Seller</span>
+
+                                <%  } %>
+                              </small>
+                             
                                 </li> 
                     
                       </ul>
@@ -40,7 +48,7 @@
                               </li>
                        
                       <li class="nav-item">
-                          <a class="nav-link" href="/user/<%= user._id%>/services/all">Services</a>
+                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
                         </li>
                   </ul>
                   <% } %>

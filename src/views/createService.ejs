@@ -15,9 +15,15 @@ form{
     <div class="form-group">
     <select class="form-control" name="service[category]" id="category" required>
             <option value="">-Category-</option>
-        <option value="Lorem" id="lorem">Lorem</option>
-        <option value="Ipsum" id="ipsum">Ipsum</option>
+        <option value="Business" id="business">Business</option>
+        <option value="Content & Copywriting" id="copywriting">Content & Copywriting</option>
+        <option value="Design & Graphics" id="design">Design & Graphics</option>
+        <option value="Developing & Tech" id="developing">Developing & Tech</option>
+        <option value="Ecommerce & CMS" id="eccommerce">Ecommerce & CMS</option>
+        <option value="Internet Marketing" id="marketing">Internet Marketing</option>
+        <option value="Video & Audio" id="media">Video & Audio</option>
     </select>
+
     <div id="sub">
 
     </div>
@@ -63,51 +69,66 @@ form{
 </div>
 <script>
     const sub = document.querySelector("#sub")
-    const loremSubCategories = ['loremSubCat1', 'loremSubCat2', 'loremSubCat3', 'loremSubCat4'];
-    const ipsumSubCategories = ['ipsumSubCat1', 'ipsumSubCat2', 'ipsumSubCat3', 'ipsumSubCat4']
-
+    const businessArr = ['Branding Services','Business Plans', 'Business Tips','Career Advice', 
+                            'Financial Consulting', 'Legal Consulting','Market Research',
+                            'Presentations', 'Virtual Assistant'];
+    const copywritingArr = ['Articles & Blog Posts', 'Business Copywriting', 'Creative Writing', 'Legal Writing', 'Other', 'Press Releases', 'Product Descriptions', 'Proofreading & Editing', 'Research & Summaries', 'Resumes & Cover Letters', 'Transcription', 'Translation']
+    const designArr = ['3D Design', 'Brochure Design', 'Caricatures', 'Cartoon Design', 'Customize Graphics', 'Digital Publishing', 'Drawing & Sketching', 'eBook cover', 'Email Design', 'Icon Set Design', 'Invitation Design', 'Landing Page', 'Logo Customization', 'Logo Design', 'Other', 'Photo Editing', 'Poster & Flyer Design', 'T-Shirt Design', 'Vector Illustration']
+    const developingArr = ['AI & Machine Learning', 'Android Development', 'ASP.NET', 'Block Chain Services', 'Bug Fixes', 'Chatbot Services', 'Databases', 'Forex', 'iOS Development', 'Native Web App', 'New Website Development', 'Other', 'PSD to HTML', 'Python Developer', 'QA', 'Server Admin', 'User Testing', 'Web Components', 'Website Customization & Updates']
+    const eccommerceArr = [ 'CMS Other', 'Drupal', 'eCommerce', 'Joomla', 'Magento', 'Online Shopping', 'OpenCart', 'Prestashop', 'Shopify', 'WooCommerce', 'Wordpress']
+    const marketingArr = ['Buy Web Traffic', 'Content Marketing', 'Email Marketing Services', 'Guest Post Services', 'Marketing Help', 'Marketing Strategy', 'Mobile Advertising', 'Other', 'SEO & SEM', 'SEO Plugins & Tools', 'Social Media Marketing', 'Video Marketing Services', 'Web Analytics']
+    const mediaArr = [ 'Traffic', 'Animated Characters & Modeling', 'Audio Editing', 'Editing & Post Production', 'Intros & Animated Logos', 'Lyric & Music Videos', 'Mixing & Mastering', 'Other', 'Producers & Composers', 'Promotional & Brand Videos', 'Singer-Songwriters', 'Spokespersons & Testimonials', 'Voice Over', 'Whiteboard & Explainer Videos']
 const loremSubCat = document.createElement('select');
 loremSubCat.setAttribute("class", "form-control");
 
-// var blank = '<option value="">-Category-</option>'
-// const categSort = (categ,catArr) =>{
-//     catArr.forEach((cat)=>{
-// blank+=`<option value="${cat}" id="">${cat}</option>`
-// let holder = document.createElement("select");
-// holder.setAttribute("class", "form-control");
-
-// })
-// }
-
-loremSubCat.innerHTML = `
-        <option value="">-Subcategory-</option>
-        <option value="loremSubCat1" id="">loremSubCat1</option>      
-        <option value="loremSubCat2" id="">loremSubCat2</option>
-`
-loremSubCat.setAttribute("name", "service[subCategory]");
-const ipsumSubCat = document.createElement('select');
-ipsumSubCat.setAttribute("class", "form-control")
-ipsumSubCat.innerHTML = `
-        <option value="">-Category-</option>
-        <option value="ipsumSubCat1" id="">ipsumSubCat1</option>
-        <option value="ipsumSubCat2" id="">ipsumSubCat2</option>
-`
-ipsumSubCat.setAttribute("name", "service[subCategory]");
-
+var blank = '<option value="">-SubCategory-</option>'
+const categSort = (categ,catArr) =>{
+    catArr.forEach((cat)=>{
+blank+=`<option value="${cat}" id="">${cat}</option>`
+let holder = document.createElement("select");
+holder.setAttribute("class", "form-control");
+holder.setAttribute("name", "service[subCategory]");
 const selCategory = document.querySelector("#category");
 selCategory.addEventListener("change", ()=>{
-    if(selCategory.value == "Lorem"){
+    categSort(selCategory.value)
+    if(selCategory.value == categ){
        sub.innerHTML = ""
-        sub.appendChild(loremSubCat);
-        
-        
-    } else if(selCategory.value == "Ipsum"){
-       sub.innerHTML = ""
-        sub.appendChild(ipsumSubCat);
-
-    } else if(selCategory.value = ""){
-        sub.innerHTML = "";
+        sub.appendChild(holder);
     }
 })
+
+})
+}
+
+// loremSubCat.innerHTML = `
+//         <option value="">-Subcategory-</option>
+//         <option value="loremSubCat1" id="">loremSubCat1</option>      
+//         <option value="loremSubCat2" id="">loremSubCat2</option>
+// `
+// loremSubCat.setAttribute("name", "service[subCategory]");
+// const ipsumSubCat = document.createElement('select');
+// ipsumSubCat.setAttribute("class", "form-control")
+// ipsumSubCat.innerHTML = `
+//         <option value="">-Category-</option>
+//         <option value="ipsumSubCat1" id="">ipsumSubCat1</option>
+//         <option value="ipsumSubCat2" id="">ipsumSubCat2</option>
+// `
+// ipsumSubCat.setAttribute("name", "service[subCategory]");
+
+// const selCategory = document.querySelector("#category");
+// selCategory.addEventListener("change", ()=>{
+//     if(selCategory.value == "Lorem"){
+//        sub.innerHTML = ""
+//         sub.appendChild(loremSubCat);
+        
+        
+//     } else if(selCategory.value == "Ipsum"){
+//        sub.innerHTML = ""
+//         sub.appendChild(ipsumSubCat);
+
+//     } else if(selCategory.value = ""){
+//         sub.innerHTML = "";
+//     }
+// })
 </script>
 <% include ./partials/footer.ejs %>
