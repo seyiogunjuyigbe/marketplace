@@ -13,4 +13,40 @@
 
 </head>
 <body>
+        <div class="row">
+                <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                    <ul class="navbar-nav mr-auto navbar-right">
+                        <%  if(!user){ %>
+                           <li class="nav-item">
+                          <a class="nav-link" href="/user/register">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/user/login">Login</a>
+                        </li>
+                    <%  }
+                      else{ %>
+                         <li class="nav-item">
+                              <a class="nav-link" href="/user/logout">Logout</a>
+                            </li> 
+                            <li class="nav-item">
+                                  <span class="nav-link">Signed in as <%= user.username %></a>
+                              </span>
+                                </li> 
+                    
+                      </ul>
+                  <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/profile/<%= user._id%>/dashboard">Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/user/profile/<%= user._id%>/edit">Edit Profile</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/user/profile/<%= user._id%>/services/all">Services</a>
+                        </li>
+                  </ul>
+                  <% } %>
+                </nav>
+              <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+      
     

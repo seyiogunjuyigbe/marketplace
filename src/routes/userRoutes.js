@@ -4,7 +4,7 @@ import { renderServicePage, createService, seeAllServices } from "../middlewares
 import { myProfile } from "../middlewares/myProfile";
 
 export const initRoutes = app =>{
-    app.get("/", (req,res)=>res.render("index"));
+    app.get("/", isLoggedIn, (req,res)=>res.render("index"));
     app.get("/user/register", (req,res)=>res.render("register"));
     app.get("/user/login", (req,res)=>res.render("login"));
     app.get("/user/profile", myProfile);
@@ -20,5 +20,5 @@ export const initRoutes = app =>{
     app.put("/user/:id", editUser)
 // Create Service
     app.post("/user/:id/services/new", isLoggedIn, createService)
-   
+
 }
