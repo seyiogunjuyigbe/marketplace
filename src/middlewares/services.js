@@ -22,6 +22,7 @@ export const createService = (req,res)=>{
     } else{
         service.createdAt = Date.now();
         service.createdBy = user._id;
+        service.save();
         user.services.push(service);
         user.save()
         return res.status(200).send(service)
@@ -34,7 +35,7 @@ export const createService = (req,res)=>{
 }
 
 export const seeAllServices = (req,res)=>{
-    User.findById(req.user._id, (err,user)=>{
+    User.findById(req.user._id).populate("services").exec((err, user)=>{
         if(err){
             return res.status(404).send("User not found")
         } else{

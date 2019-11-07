@@ -1,4 +1,9 @@
 <% include ./partials/header.ejs %>
+<style>
+form{
+    width: 60%;
+}
+</style>
 <div class="jumbotron">
 <h2>Add a Service</h2>
 </div> 
@@ -8,7 +13,7 @@
     <input class="form-control" type="text" name="service[title]" placeholder="Title" id="" required>
     <textarea class="form-control" name="service[description]" id="" cols="30" rows="10" required></textarea>
     <div class="form-group">
-    <select class="form-control" name="category" id="category" required>
+    <select class="form-control" name="service[category]" id="category" required>
             <option value="">-Category-</option>
         <option value="Lorem" id="lorem">Lorem</option>
         <option value="Ipsum" id="ipsum">Ipsum</option>
@@ -17,9 +22,15 @@
 
     </div>
     </div>
-    <input class="form-control" type="text" name="tags" placeholder="Separate tags with commas" id="">
+    <select class="form-control" name="service[isPrivate]" id="isPrivate" required>
+        <option value="">-Service Privacy-</option>
+        <option value="true">Private</option>
+        <option value="false">Public</option>
 
-
+    </select>
+    <input class="form-control" type="number" name="service[price]" placeholder="Price (USD)" id="" required>
+    <input class="form-control" type="number" name="service[deliveryTime]" placeholder="Delivery time (days)" id="" required>
+    <input class="form-control" type="number" name="service[revisionCount]" placeholder="Revision Count" required>
 <input class="form-control" type="submit">
     <!-- 
   
@@ -28,10 +39,6 @@
         question: String,
         answer: String
     }],
-    isPrivate: Boolean,
-    price: Number,
-    currency: {type:String, default: "USD"},
-    deliveryTime: Number,
     revisionCount: String,
     extras: [{
         title: String,
@@ -77,7 +84,7 @@ loremSubCat.innerHTML = `
         <option value="loremSubCat1" id="">loremSubCat1</option>      
         <option value="loremSubCat2" id="">loremSubCat2</option>
 `
-loremSubCat.setAttribute("name", "subCategory");
+loremSubCat.setAttribute("name", "service[subCategory]");
 const ipsumSubCat = document.createElement('select');
 ipsumSubCat.setAttribute("class", "form-control")
 ipsumSubCat.innerHTML = `
@@ -85,7 +92,7 @@ ipsumSubCat.innerHTML = `
         <option value="ipsumSubCat1" id="">ipsumSubCat1</option>
         <option value="ipsumSubCat2" id="">ipsumSubCat2</option>
 `
-ipsumSubCat.setAttribute("name", "subCategory");
+ipsumSubCat.setAttribute("name", "service[subCategory]");
 
 const selCategory = document.querySelector("#category");
 selCategory.addEventListener("change", ()=>{

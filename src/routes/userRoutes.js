@@ -1,6 +1,6 @@
 import {newUser,registerUser,editUser, loginUser,logoutUser,isLoggedIn} from "../middlewares/middlewares";
 import { logHelp } from "../helpers/login";
-import { renderServicePage, createService, seeAllServices } from "../middlewares/createService";
+import { renderServicePage, createService, seeAllServices } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
 
 export const initRoutes = app =>{
