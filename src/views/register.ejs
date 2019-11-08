@@ -10,7 +10,18 @@
     <input class="form-control" type="tel" name="user[phoneNumber]" placeholder="Phone Number" required>    
     <input class="form-control" type="text" name = "username" placeholder="Username" required>
     <input class="form-control" type="password" name = "password" placeholder="Password" required>   
-
+    <select class="form-control" name="user[isSeller]" id="" required>
+        <option value="">I want to sell services</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+        
+    </select>
+    <select class="form-control" name="user[isBuyer]" id="" required>
+            <option value="">I want to buy from service providers</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            
+        </select>
     <input class="form-control" type="submit" value="Register">
     </form>
     <small>Already have an account? </small><a href="/user/login">Login</a>
