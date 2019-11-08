@@ -34,7 +34,7 @@ export const createService = (req,res)=>{
 
 }
 
-export const seeAllServices = (req,res)=>{
+export const seeMyServices = (req,res)=>{
     User.findById(req.user._id).populate("services").exec((err, user)=>{
         if(err){
             return res.status(404).send("User not found")
