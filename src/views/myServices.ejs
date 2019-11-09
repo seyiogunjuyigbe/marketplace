@@ -20,7 +20,7 @@
         <% user.services.forEach((service)=>{ %>
             <tr>
                 <td><%=user.services.indexOf(service) + 1%></td>
-                <td><%=service.title%></td>
+                <td><a href="/services/<%=service._id%>"><%=service.title%></a></td>
                 <td><%=service.category%></td>
                 <td><%=new Date(Date.parse(service.createdAt)).toDateString()%></td>
                 <td>0</td>

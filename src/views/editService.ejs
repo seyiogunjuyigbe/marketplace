@@ -13,7 +13,7 @@ form{
     <input class="form-control" type="text" value="service[title]" placeholder="Title" id="" required>
     <textarea class="form-control" value="service[description]" id="" cols="30" rows="10" required></textarea>
     <div class="form-group">
-        <span id="category" data="<%=service.category%>"></span>
+        <span id="categ" data="<%=service.category%>"></span>
     <select class="form-control" name="service[category]" id="category" required>
             <option value="">-Category-</option>
         <option value="Business" id="business">Business</option>
@@ -45,19 +45,19 @@ form{
 </div>
 <script>
     document.querySelector("#select").addEventListener("load", select())
-    const getOption = (el,code)=>{
-        var code = document.querySelector("#code").getAttribute("data");
+    const getOption = ()=>{
+        var code = document.querySelector("#categ").getAttribute("data");
        function select(){
-        document.querySelectorAll("option").forEach(function(opt){
+        document.querySelectorAll("option")[0].forEach(function(opt){
         if(String(opt.value) == String(code)){
         opt.setAttribute("selected", "selected")
-        document.querySelector("#bank-code").value = String(opt.value);
+        
     }
     })
 }
 select();
     }
-   var code = document.querySelector("#code").getAttribute("data");
-   
+  
+
 </script>
 <% include ./partials/footer.ejs %>

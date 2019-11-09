@@ -1,6 +1,6 @@
 import {newUser,registerUser,editUser, loginUser,logoutUser,isLoggedIn} from "../middlewares/middlewares";
 import { logHelp } from "../helpers/login";
-import { renderServicePage, createService, seeMyServices } from "../middlewares/services";
+import { renderServicePage, createService, seeMyServices, editService } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService } from "../middlewares/getServices";
 
@@ -14,6 +14,7 @@ export const initRoutes = app =>{
     app.get("/user/:id/services/all", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
     app.get("/services/:id", getThisService);
+    app.get("user/:id/services/service._id/edit", isLoggedIn, editService);
     // app.get("/user/login/success", (req,res)=>res.send(`${req.user} Logged in successfully!`))
     app.post("/user/register", registerUser);
     app.post("/user/login", loginUser, logHelp);
