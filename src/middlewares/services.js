@@ -39,7 +39,20 @@ export const seeMyServices = (req,res)=>{
         if(err){
             return res.status(404).send("User not found")
         } else{
-            return res.status(200).render("allServices", {user:user})
+            return res.status(200).render("myServices", {user:user})
         }
     })
 }
+
+export const editService = (req,res)=>{
+    Service.findById(req.params.id, (err,service)=>{
+        if(req.user._id !== service.createdBy){
+            return res.status(401).send("You are not permitted to do that!")
+        } else if(err){
+            return res.status(404).send("Service not found")
+        } else{
+            return res.status(200).render("editService", {service:service})
+        }
+    })
+}
+
