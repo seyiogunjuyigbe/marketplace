@@ -1,6 +1,6 @@
 import {newUser,registerUser,editUser, loginUser,logoutUser,isLoggedIn} from "../middlewares/middlewares";
 import { logHelp } from "../helpers/login";
-import { renderServicePage, createService, seeMyServices, editService } from "../middlewares/services";
+import { renderServicePage, createService, seeMyServices, editService, deleteService } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService } from "../middlewares/getServices";
 
@@ -14,7 +14,8 @@ export const initRoutes = app =>{
     app.get("/user/:id/services/all", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
     app.get("/services/:id", getThisService);
-    app.get("user/:id/services/service._id/edit", isLoggedIn, editService);
+    app.get("/user/:id/services/service._id/edit", isLoggedIn, editService);
+    app.get("/user/:id/services/service._id/delete", isLoggedIn, deleteService)
     // app.get("/user/login/success", (req,res)=>res.send(`${req.user} Logged in successfully!`))
     app.post("/user/register", registerUser);
     app.post("/user/login", loginUser, logHelp);
@@ -24,5 +25,5 @@ export const initRoutes = app =>{
     app.put("/user/:id", editUser)
 // Create Service
     app.post("/user/:id/services/new", isLoggedIn, createService)
-
+        // app.all("*", (req,res)=>{res.send("Error... resource not found")})
 }

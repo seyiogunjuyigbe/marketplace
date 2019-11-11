@@ -46,10 +46,10 @@ export const seeMyServices = (req,res)=>{
 
 export const editService = (req,res)=>{
     Service.findById(req.params.service_id, (err,service)=>{
-        if(req.user._id !== service.createdBy){
-            return res.status(401).send("You are not permitted to do that!")
-        } else if(err){
+        if(err){
             return res.status(404).send("Service not found")
+        }  else if(req.user._id !== service.createdBy){
+            return res.status(401).send("You are not permitted to do that!")
         } else{
             return res.status(200).render("editService", {service:service})
         }
@@ -66,3 +66,15 @@ export const updateService = (req,res)=>{
     })
 }
 
+export const deleteService = (req,res)=>{
+    Service.findByIdAndDelete(req.params.service_id, (err,service)=>{
+        if(err){
+            return res.status(404).send("Service not found")
+        }  else if(req.user._id !== service.createdBy){
+            return res.status(401).send("You are not permitted to do that!")
+        } else{
+            console.log("Service deleted")
+            return res.status(200).render("dashboard", {user:req.user})
+        }
+    })
+}
