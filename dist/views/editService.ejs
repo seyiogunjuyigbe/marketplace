@@ -1,0 +1,63 @@
+<% include ./partials/header.ejs %>
+<style>
+form{
+    width: 60%;
+}
+</style>
+<div class="jumbotron">
+<h2>Edit Service: <%=service.title%></h2>
+</div> 
+
+<div class="container">
+    <form action="/user/<%=user._id%>/services/new?_method=PUT" method="POST">
+    <input class="form-control" type="text" value="service[title]" placeholder="Title" id="" required>
+    <textarea class="form-control" value="service[description]" id="" cols="30" rows="10" required></textarea>
+    <div class="form-group">
+        <span id="categ" data="<%=service.category%>"></span>
+    <select class="form-control" name="service[category]" id="category" required>
+            <option value="">-Category-</option>
+        <option value="Business" id="business">Business</option>
+        <option value="Content & Copywriting" id="copywriting">Content & Copywriting</option>
+        <option value="Design & Graphics" id="design">Design & Graphics</option>
+        <option value="Developing & Tech" id="developing">Developing & Tech</option>
+        <option value="Ecommerce & CMS" id="eccommerce">Ecommerce & CMS</option>
+        <option value="Internet Marketing" id="marketing">Internet Marketing</option>
+        <option value="Video & Audio" id="media">Video & Audio</option>
+    </select>
+
+    <div id="sub">
+
+    </div>
+    </div>
+    <span id="privacy" data="<%=service.isPrivate%>"></span>
+    <select class="form-control" name="service[isPrivate]" id="isPrivate" required>
+        <option value="">-Service Privacy-</option>
+        <option value="true">Private</option>
+        <option value="false">Public</option>
+
+    </select>
+    <input class="form-control" type="number" value="service[price]" placeholder="Price (USD)" id="" required>
+    <input class="form-control" type="number" value="service[deliveryTime]" placeholder="Delivery time (days)" id="" required>
+    <input class="form-control" type="number" value="service[revisionCount]" placeholder="Revision Count" required>
+<input class="form-control" type="submit" value="Update">
+<span id="select"></span>
+</form>
+</div>
+<script>
+    document.querySelector("#select").addEventListener("load", select())
+    const getOption = ()=>{
+        var code = document.querySelector("#categ").getAttribute("data");
+       function select(){
+        document.querySelectorAll("option")[0].forEach(function(opt){
+        if(String(opt.value) == String(code)){
+        opt.setAttribute("selected", "selected")
+        
+    }
+    })
+}
+select();
+    }
+  
+
+</script>
+<% include ./partials/footer.ejs %>
