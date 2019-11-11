@@ -5,9 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node bin/dev",
-    "build": "mkdir dist && babel src -s -d dist",
-    "dev": "nodemon --exec babel-node -- ./src/app.js",
-    "heroku-postbuild": "cross-env NODE_ENV=production npm run build",
+      "dev": "nodemon --exec babel-node -- ./src/app.js",
     "lint": "eslint"
   },
   "repository": {
