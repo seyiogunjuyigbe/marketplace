@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./dist/app.js",
-    "build": "mkdir dist && babel src -s -d dist",
+   "build": "rm -rf dist/ && babel src/ -d dist/ --copy-files",
     "dev": "nodemon --exec babel-node -- ./src/app.js",
     "heroku-postbuild": "cross-env NODE_ENV=production npm run build",
     "lint": "eslint"
