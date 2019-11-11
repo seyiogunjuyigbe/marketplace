@@ -48,10 +48,13 @@ export const editService = (req,res)=>{
     Service.findById(req.params.service_id, (err,service)=>{
         if(err){
             return res.status(404).send("Service not found")
-        }  else if(req.user._id !== service.createdBy){
-            return res.status(401).send("You are not permitted to do that!")
-        } else{
+       }  
+         if(service.createdBy == req.user._id){
             return res.status(200).render("editService", {service:service})
+          } 
+        else{
+            console.log(`${service.createdBy} is not equal to ${req.user._id}`)
+            return res.status(401).send("You are not permitted to do that!")
         }
     })
 }
