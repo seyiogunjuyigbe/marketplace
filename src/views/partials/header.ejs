@@ -13,4 +13,46 @@
 
 </head>
 <body>
+        <div class="row">
+                <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                    <ul class="navbar-nav mr-auto navbar-right">
+                        <%  if(!user){ %>
+                           <li class="nav-item">
+                          <a class="nav-link" href="/user/register">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/user/login">Login</a>
+                        </li>
+                    <%  }
+                      else{ %>
+                         <li class="nav-item">
+                              <a class="nav-link" href="/user/logout">Logout</a>
+                            </li> 
+                            <li class="nav-item">
+                              <small> Signed in as <%= user.username %>
+                               <% if(user.isBuyer == true){ %>
+                                  <span class="badge badge-info">Buyer</span>
+                              <%  } %>
+                              <% if(user.isSeller == true){ %>
+                                <span class="badge badge-success">Seller</span>
+
+                                <%  } %>
+                              </small>
+                             
+                                </li> 
+                    
+                      </ul>
+                  <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                                <a class="nav-link" href="/user/<%= user._id%>/services/new">Add new Service</a>
+                              </li>
+                       
+                      <li class="nav-item">
+                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
+                        </li>
+                  </ul>
+                  <% } %>
+                </nav>
+              <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+      
     

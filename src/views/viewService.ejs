@@ -1,0 +1,38 @@
+<% include ./partials/header.ejs %>
+<style>
+img{
+    max-width: 100%;
+}
+</style>
+<div class="container">
+        <div class="jumbotron">
+            <h1><%=service.title%></h1>
+            <% if (user && service.createdBy == user._id){ %>
+                <a class="btn btn-secondary" href="/user/<%=user._id%>/services/<%=service._id%>/edit">Edit</a>
+            <% } %>
+        </div>
+    <img src="/img/service.jpg" alt="">
+    <h3>Description</h3>
+    <p><%=service.description%></p>
+    
+    <h3>Category</h3>
+    <p><%=service.category%></p>
+
+    <h3>Price</h3>
+    <p><%=service.deliveryTime%> days</p>
+
+    <h3>Delivery Time</h3>
+    <p><%=service.price%> <%=service.currency%></p>
+    
+    <h3>Revision Count</h3>
+    <p><%=service.revisionCount%></p>
+</div>
+<% if (!user){ %>
+    <a class="btn btn-success" href="/user/<%=service.createdBy%>/services/<%=service._id%>/purchase">Purchase Service</a>
+<% } else if (service.createdBy !== user._id){ %>
+    <a class="btn btn-danger" href="/user/<%=service.createdBy%>/services/<%=service._id%>/purchase">Delete Service</a>
+<% } else if (user && service.createdBy == user._id){ %>
+    <a class="btn btn-danger" href="/user/<%=user._id%>/services/<%=service._id%>/delete">Delete Service</a>
+<% }%>
+
+<% include ./partials/footer.ejs %>
