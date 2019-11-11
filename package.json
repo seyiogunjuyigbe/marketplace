@@ -4,7 +4,7 @@
   "description": "Marketplace",
   "main": "src/app.js",
   "scripts": {
-    "start": "node bin/dev",
+    "start": "node src/app.js",
       "dev": "nodemon --exec babel-node -- ./src/app.js",
     "lint": "eslint"
   },
