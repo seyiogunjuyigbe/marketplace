@@ -6,6 +6,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
 const methodOverride = require('method-override');
+const paypal = require("paypal-rest-sdk");
 const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
@@ -46,6 +47,7 @@ app.use(function(req, res, next){
 })
 
 initRoutes(app)
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, process.env.IP, ()=>{
