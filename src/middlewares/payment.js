@@ -31,15 +31,16 @@ export const payNow = ( req , res ) => {
 		"payment_method": "paypal"
 	},
 	"redirect_urls": {
-		"return_url": "http://127.0.0.1:3000/success",
-		"cancel_url": "http://127.0.0.1:3000/err"
+		"return_url": `http://localhost:3000/services/${service._id}/payment/success`,
+		"cancel_url": "http://localhost:3000/err"
 	},
 	"transactions": [{
 		"amount": {
 			"total": service.price,
 			"currency": service.currency
 		},
-		"description": service.title
+        "description": service._id,
+        
 	}]
     }
 
@@ -51,7 +52,8 @@ export const payNow = ( req , res ) => {
             var counter = links.length; 
             while( counter -- ) {
                 if ( links[counter].method == 'REDIRECT') {
-					// redirect to paypal where user approves the transaction 
+                    // redirect to paypal where user approves the transaction 
+                    console.log(transaction);
                     return res.redirect( links[counter].href )
                 }
             }
@@ -62,6 +64,21 @@ export const payNow = ( req , res ) => {
         });
     }
     })
+    }
+
+
+    export const paymentSuccess = (req,res) =>{
+                               Service.findById(req.params.service_id, (err,service)=>{
+                        if(err){
+                   return res.status(404).send("Internal Server Error... Server not found")
+
+                        } else{
+
+                            res.send(`${service} was paid for by ${req.user.username} and this is the transaction: ${transaction}`)
+                        }
+                
+            });
+        
     }
 
 					
