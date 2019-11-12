@@ -25,7 +25,8 @@ export const createService = (req,res)=>{
         service.save();
         user.services.push(service);
         user.save()
-        return res.status(200).send(service)
+        return res.status(200).render("viewService", {service:service})
+        
     }
     })
 }

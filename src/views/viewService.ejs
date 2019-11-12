@@ -27,14 +27,12 @@ img{
     <h3>Revision Count</h3>
     <p><%=service.revisionCount%></p>
 </div>
-<% if (!user){ %>
-    <a class="btn btn-success" href="/user/<%=service.createdBy%>/services/<%=service._id%>/purchase">Purchase Service</a>
+<% if (!user || service.createdBy !== user._id){ %>
+    <a class="btn btn-success" href="/services/<%=service._id%>/pay">Purchase Service</a>
 <% } %>
 
 <% if (user && service.createdBy == user._id){ %>
     <a class="btn btn-danger" href="/user/<%=user._id%>/services/<%=service._id%>/delete">Delete Service</a>
-<% } else { %>
-    <a class="btn btn-success" href="/user/<%=service.createdBy%>/services/<%=service._id%>/purchase">Purchase Service</a>
 <% } %>
 
 <% include ./partials/footer.ejs %>

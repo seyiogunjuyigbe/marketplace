@@ -35,24 +35,46 @@
                               <%  } %>
                               <% if(user.isSeller == true){ %>
                                 <span class="badge badge-success">Seller</span>
-
                                 <%  } %>
                               </small>
-                             
-                                </li> 
-                    
+               </li> 
+               <li><a class="nav-link" href="/user/<%=user._id%>/services/new">Become a seller</a></li>
+               
                       </ul>
                   <ul class="nav nav-pills flex-column">
                       <li class="nav-item">
                           <a class="nav-link" href="/services/all">All Services</a>
                         </li>
+                        <% if(user.isSeller == true){ %>
                         <li class="nav-item">
                                 <a class="nav-link" href="/user/<%= user._id%>/services/new">Add new Service</a>
                               </li>
                        
                       <li class="nav-item">
                           <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
-                        </li>
+                      
+                      </li>
+                      </li class=nav-item>
+                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Orders</a>
+
+                      <li>
+                       <% } %>
+                       
+                      <% if(user.isBuyer == true){ %>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/user/<%= user._id%>/services/new">Add new Service</a>
+                              </li>
+                       
+                      <li class="nav-item">
+                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
+                      
+                      </li>
+                      </li class=nav-item>
+                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Orders</a>
+
+                      <li>
+                     <%  } %>
+                       
                   </ul>
                   <% } %>
                 </nav>

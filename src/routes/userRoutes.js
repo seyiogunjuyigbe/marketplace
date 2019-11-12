@@ -3,7 +3,7 @@ import { logHelp } from "../helpers/login";
 import { renderServicePage, createService, seeMyServices, editService, deleteService } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService } from "../middlewares/getServices";
-import { payNow } from "../middlewares/payment";
+import { payNow, paymentSuccess } from "../middlewares/payment";
 
 export const initRoutes = app =>{
     app.get("/", isLoggedIn, (req,res)=>res.render("index"));
@@ -23,7 +23,9 @@ export const initRoutes = app =>{
     app.get("/user/logout", logoutUser);
     app.post("/user/new", newUser);
 
-    app.get("/user/:id/services/:service_id/pay",isLoggedIn, payNow)
+    app.get("/services/:service_id/pay",isLoggedIn, payNow)
+    app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
+
     // success page 
 app.get('/success' , (req ,res ) => {
     console.log(req.query); 
