@@ -1,8 +1,16 @@
 import { createPay } from "../helpers/createPay";
+import {PAYPAL_MODE, PAYPAL_SECRET, PAYPAL_CLIENT_ID} from "../config/constants"
 const Service = require("../models/service");
 
 const paypal = require("paypal-rest-sdk")
 
+
+// module.exports = () 
+paypal.configure({
+    'mode': PAYPAL_MODE, 
+    'client_id': PAYPAL_CLIENT_ID,
+    'client_secret': PAYPAL_SECRET
+  });
 
 // start payment process 
 export const payNow = ( req , res ) => {
@@ -23,15 +31,16 @@ export const payNow = ( req , res ) => {
 		"payment_method": "paypal"
 	},
 	"redirect_urls": {
-		"return_url": "http://127.0.0.1:3000/success",
-		"cancel_url": "http://127.0.0.1:3000/err"
+		"return_url": `http://localhost:3000/services/${service._id}/payment/success`,
+		"cancel_url": "http://localhost:3000/err"
 	},
 	"transactions": [{
 		"amount": {
 			"total": service.price,
 			"currency": service.currency
 		},
-		"description": service.title
+        "description": service._id,
+        
 	}]
     }
 
@@ -43,7 +52,8 @@ export const payNow = ( req , res ) => {
             var counter = links.length; 
             while( counter -- ) {
                 if ( links[counter].method == 'REDIRECT') {
-					// redirect to paypal where user approves the transaction 
+                    // redirect to paypal where user approves the transaction 
+                    console.log(transaction);
                     return res.redirect( links[counter].href )
                 }
             }
@@ -54,6 +64,21 @@ export const payNow = ( req , res ) => {
         });
     }
     })
+    }
+
+
+    export const paymentSuccess = (req,res) =>{
+                               Service.findById(req.params.service_id, (err,service)=>{
+                        if(err){
+                   return res.status(404).send("Internal Server Error... Server not found")
+
+                        } else{
+
+                            res.send(`${service} was paid for by ${req.user.username} and this is the transaction: ${transaction}`)
+                        }
+                
+            });
+        
     }
 
 					
