@@ -23,7 +23,7 @@ export const initRoutes = app =>{
     app.get("/user/logout", logoutUser);
     app.post("/user/new", newUser);
 
-    app.get("/user/:id/services/:service_id/pay",isLoggedIn, payNow)
+    app.get("/services/:service_id/pay",isLoggedIn, payNow)
     // success page 
 app.get('/success' , (req ,res ) => {
     console.log(req.query); 
