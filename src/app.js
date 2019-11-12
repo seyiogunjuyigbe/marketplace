@@ -32,6 +32,16 @@ app.use(require("express-session")({
     saveUninitialized: false, 
     expires: new Date(Date.now() + (30 * 86400 * 1000))
 }));
+// app.set('trust proxy', 1) // trust first proxy
+ 
+
+// app.use(require('cookie-session')({
+//     name: 'session',
+//     keys: ['key1', 'key2'],
+//     maxAge: new Date(Date.now() + (30 * 86400 * 1000)),
+//     expires: new Date(Date.now() + (30 * 86400 * 1000))
+// }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use("local", new LocalStrategy(User.authenticate()));
