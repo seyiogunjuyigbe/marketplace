@@ -1,5 +1,5 @@
 import { createPay } from "../helpers/createPay";
-import {PAYPAL_MODE, PAYPAL_SECRET, PAYPAL_CLIENT_ID} from "../config/constants"
+import {PAYPAL_MODE, PAYPAL_SECRET, PAYPAL_CLIENT_ID, DOMAIN_NAME} from "../config/constants"
 const Service = require("../models/service");
 
 const paypal = require("paypal-rest-sdk")
@@ -31,8 +31,8 @@ export const payNow = ( req , res ) => {
 		"payment_method": "paypal"
 	},
 	"redirect_urls": {
-		"return_url": `http://localhost:3000/services/${service._id}/payment/success`,
-		"cancel_url": "http://localhost:3000/err"
+		"return_url": `${DOMAIN_NAME}/services/${service._id}/payment/success`,
+		"cancel_url": `${DOMAIN_NAME}/err`
 	},
 	"transactions": [{
 		"amount": {
