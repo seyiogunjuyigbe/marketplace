@@ -82,8 +82,12 @@ export const payNow = ( req , res ) => {
                     });
             }
 
-					
+	
 		const createTrans = (req, trans,service) =>{
+
+
+		const createTrans = (trans,service) =>{
+
             User.findById(service.createdBy, (err,user)=>{
                 if(err){
                     res.status(404).send("User not found..")
