@@ -14,12 +14,68 @@
 </head>
 <body>
     <style>
-    .dropdown-menu, .bg-dark{
+    .dropdown-menu, .bg-dark, .list-group, .list-group-item{
         background-color: #2A4B8B !important;
     }
     .dropdown-menu a, .nav-link{
         color: #fff;
     }
+    .nav-link:hover{
+        color: #000;
+    }
+    a.dropdown-item:hover{
+        color: #000 !important;
+
+    }
+    .lead{
+        font-weight: 500;
+        color: #f3f3f3;
+        padding: 1em;
+    }
+    /* The side navigation menu */
+.sidenav {
+  height: 70%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  background-color: #2A4B8B; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  right: 0;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  /* padding: 8px 8px 8px 32px; */
+  text-decoration: none;
+  font-size: 1em;
+  color: #f3f3f3;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
     </style>
        
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -59,13 +115,75 @@
                             </li>
                    <% } else{%>
                     <li class="nav-item">
-                            <a style="font-weight:bold;" class="nav-link" href="/user/<%=user._id%>/profile>"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
+                            <a style="font-weight:bold;" class="nav-link" href="/user/<%=user._id%>/profile"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
                         </li>
-                        <li class="nav-item">
-                                <a class="nav-link" href="/user/logout">Logout</a>
-                            </li>
+                            <div id="mySidenav" class="sidenav">
+                                    
+                                    <span class="lead">Hello <%=user.username%> <span class="closebtn" onclick="closeNav()">&times;</span></span>
+                                   
+                                   <ul class="list-group">
+                                       <li class="list-group-item">
+                                           <a class="nav-link" href="/user/<%=user._id%>/profile">My Dashboard</a>
+                                        </li>
+                                        <div class="dropdown-divider"></div>
+                                    <li class="list-group-item dropdown">
+                                            <span class="nav-link dropdown-toggle" id="buyingDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             Buying
+                                            </span>
+                                            <div class="dropdown-menu" aria-labelledby="buyingDropdown">
+                                              <a class="dropdown-item" href="#">My Orders</a>
+                                              <a class="dropdown-item" href="#">My Projects</a>
+                                              <a class="dropdown-item" href="#">My Favorites</a>
+                                          </div>
+                                          </li>
+                                          <div class="dropdown-divider"></div>
+                                        </li>
+                                        <li class="list-group-item dropdown">
+                                                <span class="nav-link dropdown-toggle" id="sellingDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                 Selling
+                                                </span>
+                                                <div class="dropdown-menu" aria-labelledby="sellingDropdown">
+                                                  <a class="dropdown-item" href="#">Add Service</a>
+                                                  <a class="dropdown-item" href="#">My Orders</a>
+                                                  <a class="dropdown-item" href="#">My Services</a>
+                                                  <a class="dropdown-item" href="#">My Projects</a>
+                                                  <a class="dropdown-item" href="#">My Earnings</a>
+                                                  <a class="dropdown-item" href="#">Get Endorsed</a>
+                                              </div>
+                                              </li>
+                                              <div class="dropdown-divider"></div>
+                                              <li class="list-group-item">
+                                                <a class="nav-link" href="">Inbox</a>
+                                              </li>
+                                              <li class="list-group-item">
+                                                    <a class="nav-link" href="">Balance</a>
+                                                  </li>
+                                                  <li class="list-group-item">
+                                                        <a class="nav-link" href="">Invite Friends</a>
+                                                      </li>
+                                                      <li class="list-group-item">
+                                                         <a class="nav-link" href="/user/logout">Logout</a>
+                                                    </li>
+                                    </ul>
+
+                                  </div>
+                                  
+                                  <!-- Use any element to open the sidenav -->
+                                  <span onclick="openNav()">open</span>
+                                  
+                                  </div>
                  <%  } %>
                         </ul>
                     </div>
                   </nav>
 
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
