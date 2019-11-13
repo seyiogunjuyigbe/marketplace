@@ -13,7 +13,10 @@ const userSchema = new Schema({
     isBuyer: Boolean,
     messages: [],
     favourites: [],
-    purchases: [],
+    purchases: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Purchase"
+    }],
     seller_profile: {
         skills: [{
             name:String,
@@ -30,7 +33,8 @@ const userSchema = new Schema({
     services:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Service"
-    }]
+    }],
+    transactions: []
 
 })
 userSchema.plugin(passportLocalMongoose);

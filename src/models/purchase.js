@@ -15,7 +15,7 @@ const purchaseSchema = new Schema({
             },
             description: String,
         related_resources: [] } ],
-        create_time: String,
+        create_time: Date,
         links:[{
             href: String,
             rel: String,
@@ -23,6 +23,7 @@ const purchaseSchema = new Schema({
         }],
         httpStatusCode: Number    
     },
+    createdAt: Date,
     status: String
 })
 module.exports = mongoose.model("Purchase", purchaseSchema)

@@ -31,15 +31,15 @@ export const payNow = ( req , res ) => {
 		"payment_method": "paypal"
 	},
 	"redirect_urls": {
-		"return_url": `${DOMAIN_NAME}/services/${service._id}/payment/success`,
-		"cancel_url": `${DOMAIN_NAME}/err`
+		"return_url": `http://localhost:3000/services/${service._id}/payment/success`,
+		"cancel_url": `http://localhost:3000/err`
 	},
 	"transactions": [{
 		"amount": {
 			"total": service.price,
 			"currency": service.currency
 		},
-        "description": service._id,
+        "description": service.title,
         
 	}]
     }
@@ -54,15 +54,12 @@ export const payNow = ( req , res ) => {
                 if ( links[counter].method == 'REDIRECT') {
                     // redirect to paypal where user approves the transaction 
                 //    push transaction to users data
-                   const purchaseOrder = {
-                       service: service._id,
-                       owner: service.createdBy,
-                       buyer: req.user._id,
-                       transaction: transaction,
-                       status: "success"
-                   }
-                    return res.redirect( links[counter].href )
+                     createTrans(req,transaction,service);
+
+                    return res.redirect( links[counter].href );
+
                 }
+
             }
         })
         .catch( ( err ) => { 
@@ -79,18 +76,35 @@ export const payNow = ( req , res ) => {
                         if(err){
                    return res.status(404).send("Internal Server Error... Server not found")
                         } else{
+                            console.log(req._parsedOriginalUrl)
                             res.send(`${service} was paid for by ${req.user.username}`)
                         }
                     });
             }
 
 					
-		const createTrans = (trans,service) =>{
+		const createTrans = (req, trans,service) =>{
             User.findById(service.createdBy, (err,user)=>{
                 if(err){
                     res.status(404).send("User not found..")
                 } else{
-                    user.purchases.push(trans)
+                    Purchase.create({
+                        service: service._id,
+                        owner: service.createdBy,
+                        buyer:req.user._id,
+                        transaction: trans,
+                        createdAt: Date.now(),
+                        status: "pending"
+                    }, (err,purchase)=>{
+                        if(err){
+                            console.log(err)
+                        } else{
+                            user.transactions.push(trans)
+                            user.purchases.push(purchase)
+                            user.save()
+                            console.log(user)
+                        }
+                    })
                 }
             })
         }

@@ -13,71 +13,59 @@
 
 </head>
 <body>
-        <div class="row">
-                <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                    <ul class="navbar-nav mr-auto navbar-right">
-                        <%  if(!user){ %>
-                           <li class="nav-item">
-                          <a class="nav-link" href="/user/register">Sign Up</a>
+    <style>
+    .dropdown-menu, .bg-dark{
+        background-color: #2A4B8B !important;
+    }
+    .dropdown-menu a, .nav-link{
+        color: #fff;
+    }
+    </style>
+       
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/">Marketplace</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                          <span class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Browse 
+                          </span>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Business</a>
+                            <a class="dropdown-item" href="#">Content & Copywriting</a>
+                            <a class="dropdown-item" href="#">Design & Graphics</a>
+                            <a class="dropdown-item" href="#">Developing & Tech</a>
+                            <a class="dropdown-item" href="#">Ecommerce & CMS</a>
+                            <a class="dropdown-item" href="#">Internet Marketing</a>
+                            <a class="dropdown-item" href="#">Video & Audio </a>
+                            
+                        </div>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/user/login">Login</a>
-                        </li>
-                    <%  }
-                      else{ %>
-                         <li class="nav-item">
-                              <a class="nav-link" href="/user/logout">Logout</a>
-                            </li> 
-                            <li class="nav-item">
-                              <small> Signed in as <%= user.username %>
-                               <% if(user.isBuyer == true){ %>
-                                  <span class="badge badge-info">Buyer</span>
-                              <%  } %>
-                              <% if(user.isSeller == true){ %>
-                                <span class="badge badge-success">Seller</span>
-                                <%  } %>
-                              </small>
-               </li> 
-               <li><a class="nav-link" href="/user/<%=user._id%>/services/new">Become a seller</a></li>
-               
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search for a service" aria-label="Search">
+                          </form>
                       </ul>
-                  <ul class="nav nav-pills flex-column">
-                      <li class="nav-item">
-                          <a class="nav-link" href="/services/all">All Services</a>
+                      <ul class="nav justify-content-end">
+                    <%if (!user){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/register">Sign Up</a>
                         </li>
-                        <% if(user.isSeller == true){ %>
                         <li class="nav-item">
-                                <a class="nav-link" href="/user/<%= user._id%>/services/new">Add new Service</a>
-                              </li>
-                       
-                      <li class="nav-item">
-                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
-                      
-                      </li>
-                      </li class=nav-item>
-                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Orders</a>
-
-                      <li>
-                       <% } %>
-                       
-                      <% if(user.isBuyer == true){ %>
+                                <a class="nav-link" href="/user/login">Login</a>
+                            </li>
+                   <% } else{%>
+                    <li class="nav-item">
+                            <a style="font-weight:bold;" class="nav-link" href="/user/<%=user._id%>/profile>"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
+                        </li>
                         <li class="nav-item">
-                                <a class="nav-link" href="/user/<%= user._id%>/services/new">Add new Service</a>
-                              </li>
-                       
-                      <li class="nav-item">
-                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Services</a>
-                      
-                      </li>
-                      </li class=nav-item>
-                          <a class="nav-link" href="/user/<%= user._id%>/services/all">My Orders</a>
+                                <a class="nav-link" href="/user/logout">Logout</a>
+                            </li>
+                 <%  } %>
+                        </ul>
+                    </div>
+                  </nav>
 
-                      <li>
-                     <%  } %>
-                       
-                  </ul>
-                  <% } %>
-                </nav>
-              <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-      
-    

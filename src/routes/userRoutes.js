@@ -4,9 +4,10 @@ import { renderServicePage, createService, seeMyServices, editService, deleteSer
 import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService } from "../middlewares/getServices";
 import { payNow, paymentSuccess } from "../middlewares/payment";
+import { renderLandingPage } from "../middlewares/renderPage";
 
 export const initRoutes = app =>{
-    app.get("/", isLoggedIn, (req,res)=>res.render("index"));
+    app.get("/", renderLandingPage);
     app.get("/user/register", (req,res)=>res.render("register"));
     app.get("/user/login", (req,res)=>res.render("login"));
     app.get("/user/profile", myProfile);
