@@ -12,8 +12,8 @@ export const initRoutes = app =>{
     app.get("/user/login", (req,res)=>res.render("login"));
     app.get("/user/profile", myProfile);
     app.get("/user/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
-    app.get("/user/:id/services/new", isLoggedIn, renderServicePage);
-    app.get("/user/:id/services/all", isLoggedIn, seeMyServices);
+    app.get("/services/new", isLoggedIn, renderServicePage);
+    app.get("/user/:id/services/my_services", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
     app.get("/services/:id", getThisService);
     app.get("/user/:id/services/:service_id/edit", isLoggedIn, editService);

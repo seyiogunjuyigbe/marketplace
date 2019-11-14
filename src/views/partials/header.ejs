@@ -60,7 +60,31 @@
 .sidenav a:hover {
   color: #f1f1f1;
 }
+#ham {
+    display: inline-block;
+    cursor: pointer;
 
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #f3f3f3;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;
@@ -75,10 +99,20 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+  .collapse {
+       display: none !important;
+   }
+
 }
+@media (min-height: 450px) and (max-height: 760px) {
+      #navSearch{
+       width: 50% !important;
+   }
+}
+
     </style>
        
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                     <a class="navbar-brand" href="/">Marketplace</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -102,7 +136,7 @@
                         </div>
                         </li>
                         <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search for a service" aria-label="Search">
+                            <input id="navSearch" class="form-control mr-sm-2" type="search" placeholder="Search for a service" aria-label="Search">
                           </form>
                       </ul>
                       <ul class="nav justify-content-end">
@@ -113,13 +147,16 @@
                         <li class="nav-item">
                                 <a class="nav-link" href="/user/login">Login</a>
                             </li>
+                            <li class="nav-item">
+                                    <a class="nav-link btn btn-warning" href="/services/new">Become a seller</a>
+                                </li>
                    <% } else{%>
                     <li class="nav-item">
                             <a style="font-weight:bold;" class="nav-link" href="/user/<%=user._id%>/profile"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
                         </li>
                             <div id="mySidenav" class="sidenav">
                                     
-                                    <span class="lead">Hello <%=user.username%> <span class="closebtn" onclick="closeNav()">&times;</span></span>
+                                    <span class="lead">Hello <%=user.username%> <span style="cursor:pointer;" class="closebtn" onclick="closeNav()">&times;</span></span>
                                    
                                    <ul class="list-group">
                                        <li class="list-group-item">
@@ -169,7 +206,11 @@
                                   </div>
                                   
                                   <!-- Use any element to open the sidenav -->
-                                  <span onclick="openNav()">open</span>
+                                  <span id="ham" onclick="openNav()">
+                                        <div class="bar1"></div>
+                                        <div class="bar2"></div>
+                                        <div class="bar3"></div>
+                                </span>
                                   
                                   </div>
                  <%  } %>
