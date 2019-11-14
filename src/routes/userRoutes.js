@@ -5,6 +5,7 @@ import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService } from "../middlewares/getServices";
 import { payNow, paymentSuccess } from "../middlewares/payment";
 import { renderLandingPage } from "../middlewares/renderPage";
+import { charge } from "../controllers/stripe";
 
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
@@ -13,9 +14,9 @@ export const initRoutes = app =>{
     app.get("/user/profile", myProfile);
     app.get("/user/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
     app.get("/services/new", isLoggedIn, renderServicePage);
-    app.get("/user/:id/services/my_services", isLoggedIn, seeMyServices);
+    app.get("/user/:id/services/myservices", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
-    app.get("/services/:id", getThisService);
+    app.get("/services/:service_id", getThisService);
     app.get("/user/:id/services/:service_id/edit", isLoggedIn, editService);
     app.get("/user/:id/services/:service_id/delete", isLoggedIn, deleteService)
     // app.get("/user/login/success", (req,res)=>res.send(`${req.user} Logged in successfully!`))
@@ -23,9 +24,9 @@ export const initRoutes = app =>{
     app.post("/user/login", loginUser, logHelp);
     app.get("/user/logout", logoutUser);
     app.post("/user/new", newUser);
-
-    app.get("/services/:service_id/pay",isLoggedIn, payNow)
-    app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
+    app.get("/charge", charge)
+    // app.get("/services/:service_id/pay",isLoggedIn, payNow)
+    // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 
     // success page 
 app.get('/success' , (req ,res ) => {

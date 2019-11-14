@@ -1,7 +1,7 @@
 const Service = require ("../models/service");
 const User = require("../models/user")
 export const renderServicePage = (req,res)=>{
-    User.findById(req.user.id, (err,user)=>{
+    User.findById(req.user._id, (err,user)=>{
         if(err){
             return res.status(404).send("User not found")
         } else{
@@ -13,7 +13,7 @@ export const renderServicePage = (req,res)=>{
 
 
 export const createService = (req,res)=>{
-    User.findById(req.params.id, (err,user)=>{
+    User.findById(req.user._id, (err,user)=>{
         if(err){res.status(404).send("User not found!")}
         else{
     Service.create(req.body.service, (err,service)=>{

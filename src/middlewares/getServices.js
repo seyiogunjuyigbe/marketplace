@@ -11,8 +11,9 @@ Service.find({}, (err,allServices)=>{
 }
 
 export const getThisService = (req,res)=>{
-    Service.findById(req.params.id, (err,thisService)=>{
+    Service.findById(req.params.service_id, (err,thisService)=>{
         if(err){
+            console.log(err)
             return res.status(404).send("Error... Not found!")
         } else{
             return res.status(200).render("viewService", {service:thisService})
