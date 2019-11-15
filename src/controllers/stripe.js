@@ -6,9 +6,10 @@ export const charge = (req,res) => {
       currency: 'usd',
       source: 'tok_visa',
       receipt_email: 'jenny.rosen@example.com',
-    }, (err,success)=>{
+    }, (err,charge)=>{
         if(!err){
-           return res.send(success)
+           
+           return res.send(charge)
         } else{
            return res.send(err)
         }

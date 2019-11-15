@@ -1,5 +1,11 @@
 <% include ./partials/header.ejs %>
-<h1>Welcome... </h1>
+<style>
+        h3,#outLink{
+            text-align: center;
+            margin: 1em;  
+        }
+     
+        </style>
 <h3>Signing up only takes a few seconds</h3>
 
 
@@ -24,6 +30,9 @@
         </select>
     <input class="form-control" type="submit" value="Register">
     </form>
-    <small>Already have an account? </small><a href="/user/login">Login</a>
+    <div id="outLink">
+            <small>Already have an account? </small><a href="/user/login">Login</a>
+
+            </div>
 
 <% include ./partials/footer.ejs %>

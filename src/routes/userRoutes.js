@@ -25,7 +25,7 @@ export const initRoutes = app =>{
     app.get("/user/logout", logoutUser);
     app.post("/user/new", newUser);
     app.get("/charge", charge)
-    // app.get("/services/:service_id/pay",isLoggedIn, payNow)
+    app.get("/services/:service_id/pay",isLoggedIn, payNow)
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 
     // success page 

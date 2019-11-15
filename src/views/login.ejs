@@ -1,4 +1,12 @@
 <% include ./partials/header.ejs %>
+
+<style>
+h1,#outLink{
+    text-align: center;
+    margin: 1em;  
+    
+}
+</style>
 <h1>Welcome Back </h1>
 
 
@@ -9,5 +17,7 @@
 
     <input class="form-control" type="submit" value="Login">
     </form>
+    <div id="outLink">
     <small>Don't have an account? </small><a href="/user/register">Sign Up</a>
+    </div>
 <% include ./partials/footer.ejs %>
