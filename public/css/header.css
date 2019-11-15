@@ -121,11 +121,11 @@ form{
     }
     
     }
-@media (min-height: 450px) and (max-height: 760px) {
+
   #navSearch{
-   width: 50% !important;
+   width: 70% !important;
 }
-}
+
 nav{
     font-family: 'Montserrat', sans-serif;
 }

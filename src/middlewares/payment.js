@@ -35,7 +35,7 @@ export const payNow = ( req , res ) => {
                                 })
                             )
                         .then((charge)=>res.send(`This is the charge ${charge}`))
-                        .catch(err=>console.log(err))
+                        .catch(err=>res.send(err))
                 } catch(err){
                     res.send(err);
                 }
