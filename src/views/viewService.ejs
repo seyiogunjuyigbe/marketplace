@@ -36,8 +36,33 @@ img{
 <% if (user && service.createdBy == user._id){ %>
     <a class="btn btn-danger" href="/user/<%=user._id%>/services/<%=service._id%>/delete">Delete Service</a>
 <% } else { %>
-    <a class="btn btn-success" href="/services/<%=service._id%>/pay">Purchase Service</a>
+    <button class="btn btn-success" data-toggle="modal" data-target="#payModal">Purchase Service</button>
 <% } %>
 </div>
+
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="payModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="payModalTitle">Confirm Payment Intention</h5>
+              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <p>Purchase Service: <%=service.title%></p>
+                    <p>Seller: <%=service.seller%></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No, that was a mistake</button>
+              <a href="/services/<%=service._id%>/pay" class="btn btn-success">Yes, I want to pay!</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <% include ./partials/footer.ejs %>

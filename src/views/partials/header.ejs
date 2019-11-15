@@ -37,8 +37,8 @@
                             
                         </div>
                         </li>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input id="navSearch" class="form-control mr-sm-2" type="search" placeholder="Search for a service" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" action="/find" method="GET">
+                            <input id="navSearch" class="form-control mr-sm-2" type="search" name="search" placeholder="Search for a service" aria-label="Search">
                           </form>
                       </ul>
                       <ul class="nav justify-content-end">
@@ -54,7 +54,7 @@
                                 </li>
                    <% } else{%>
                     <li class="nav-item">
-                            <a style="font-weight:bold;" class="nav-link" href="/user/<%=user._id%>/profile"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
+                            <a style="font-weight:bold;" class="nav-link" href="/profile/dashboard"><%=user.firstName[0].toUpperCase()%><%=user.lastName[0].toUpperCase()%></a>
                         </li>
                             <div id="mySidenav" class="sidenav">
                                     
@@ -62,7 +62,7 @@
                                    
                                    <ul class="list-group">
                                        <li class="list-group-item">
-                                           <a class="nav-link" href="/user/<%=user._id%>/profile">My Dashboard</a>
+                                           <a class="nav-link" href="/profile/dashboard">My Dashboard</a>
                                         </li>
                                         <div class="dropdown-divider"></div>
                                     <li class="list-group-item dropdown">
@@ -70,9 +70,8 @@
                                              Buying
                                             </span>
                                             <div class="dropdown-menu" aria-labelledby="buyingDropdown">
-                                              <a class="dropdown-item" href="#">My Orders</a>
-                                              <a class="dropdown-item" href="#">My Projects</a>
-                                              <a class="dropdown-item" href="#">My Favorites</a>
+                                              <a class="dropdown-item" href="/profile/purchases">My Orders</a>
+                                              <a class="dropdown-item" href="/profile/purchases">My Projects</a>
                                           </div>
                                           </li>
                                           <div class="dropdown-divider"></div>
@@ -82,12 +81,11 @@
                                                  Selling
                                                 </span>
                                                 <div class="dropdown-menu" aria-labelledby="sellingDropdown">
-                                                  <a class="dropdown-item" href="/services/new">Add Service</a>
-                                                  <a class="dropdown-item" href="#">My Orders</a>
-                                                  <a class="dropdown-item" href="/user/<%=user._id%>/services/myservices">My Services</a>
-                                                  <a class="dropdown-item" href="#">My Projects</a>
-                                                  <a class="dropdown-item" href="#">My Earnings</a>
-                                                  <a class="dropdown-item" href="#">Get Endorsed</a>
+                                                  <a class="dropdown-item" href="/profile/services/new">Add Service</a>
+                                                  <a class="dropdown-item" href="/profile/orders">My Orders</a>
+                                                  <a class="dropdown-item" href="/profile/myservices">My Services</a>
+                                                  <a class="dropdown-item" href="/profile/orders">My Projects</a>
+                                                  <a class="dropdown-item" href="/profile/dashboard">My Earnings</a>
                                               </div>
                                               </li>
                                               <div class="dropdown-divider"></div>

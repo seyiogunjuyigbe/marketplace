@@ -1,0 +1,32 @@
+<% include ./partials/dash_header.ejs %>
+                              
+                            <table class="table">
+                              <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">CLIENT</th>
+                                  <th scope="col">SERVICE</th>
+                                  <th scope="col">ORDERED</th>
+                                  <th scope="col">DUE IN</th>
+                                  <th scope="col">STATUS</th>
+
+                                </tr>
+                                </thead>
+                                        <tbody>
+                                            <% user.orders.forEach((order)=>{ %>
+                                                <tr>
+                                                    <td><%=order.%></td>
+                                                    <td><%=order.title%></td>
+                                                    <td><%=order.orderDate%></td>
+                                                    <td><%=order.deliveryTime%> days</td>
+                                                    <td><%=order.projectStatus%></td>
+                                                    
+                                                    
+                                                </tr>
+                                          <%  }) %>
+                                        </tbody>
+                                      </table>
+                                        
+                            
+
+ <% include ./partials/dash_footer.ejs %>
+

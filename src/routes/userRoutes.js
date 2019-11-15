@@ -6,15 +6,17 @@ import { getAllServices, getThisService } from "../middlewares/getServices";
 import { payNow, paymentSuccess } from "../middlewares/payment";
 import { renderLandingPage } from "../middlewares/renderPage";
 import { charge } from "../controllers/stripe";
+import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
+import { findService } from "../helpers/findService";
 
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
     app.get("/user/register", (req,res)=>res.render("register"));
     app.get("/user/login", (req,res)=>res.render("login"));
-    app.get("/user/profile", myProfile);
-    app.get("/user/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
-    app.get("/services/new", isLoggedIn, renderServicePage);
-    app.get("/user/:id/services/myservices", isLoggedIn, seeMyServices);
+    app.get("profile/user/profile", myProfile);
+    app.get("/profile/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
+    app.get("/profile/services/new", isLoggedIn, renderServicePage);
+    app.get("/profile/myservices", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
     app.get("/services/:service_id", getThisService);
     app.get("/user/:id/services/:service_id/edit", isLoggedIn, editService);
@@ -23,26 +25,19 @@ export const initRoutes = app =>{
     app.post("/user/register", registerUser);
     app.post("/user/login", loginUser, logHelp);
     app.get("/user/logout", logoutUser);
-    app.post("/user/new", newUser);
-    app.get("/charge", charge)
+    app.get("/charge", charge);
+    app.get("/find", findService)
     app.get("/services/:service_id/pay",isLoggedIn, payNow)
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
-
-    // success page 
-app.get('/success' , (req ,res ) => {
-    console.log(req.query); 
-    res.send("Success!")
-})
-
-// error page 
-app.get('/err' , (req , res) => {
-    console.log(req.query); 
-    res.send('Failed!'); 
-})
-
+// Create Service
+    app.post("/profile/services/new", isLoggedIn, createService)
 // Update User details
     app.put("/user/:id", editUser)
-// Create Service
-    app.post("/user/:id/services/new", isLoggedIn, createService)
-        // app.all("*", (req,res)=>{res.send("Error... resource not found")})
+// View my Orders
+    app.get("/profile/orders", isLoggedIn, getMyOrders);
+// View my Purchases
+    app.get("/profile/purchases",isLoggedIn, getMyPurchases)
+// View my Inbox
+    app.get("/profile/inbox", isLoggedIn, getMyInbox)
+    app.all("*", (req,res)=>{res.send("Error... resource not found")})
 }

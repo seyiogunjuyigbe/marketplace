@@ -5,7 +5,8 @@
     }
 .card{
     float: left;
-    margin: 1%;
+    margin: 10px;
+    display: flex;
 }
 .card-title{
     font-size: 1em;
@@ -16,6 +17,7 @@
 
     </div>
     <div class="col-lg-9">
+       <% if(services){ %>
             <% services.forEach((service)=>{ %>
                 <div class="card" style="width: 30%;">
                     <% function pick(arr){var index = Math.floor(Math.random()*arr.length);%>
@@ -33,7 +35,11 @@
                          
                         </div>
                       </div>
-                      <%  }) %>
+                      <%  })  }%>
+   <% if(errorMessage) { %>
+    <p><%=errorMessage%></p>
+      <% } %>
+
     </div>
 
 </div>

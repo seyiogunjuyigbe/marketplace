@@ -22,6 +22,7 @@ export const createService = (req,res)=>{
     } else{
         service.createdAt = Date.now();
         service.createdBy = user._id;
+        service.seller = user.username;
         service.save();
         user.services.push(service);
         user.save()

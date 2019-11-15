@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const serviceSchema = new Schema({
     createdBy: String,
+    seller: String,
     createdAt : Date,
     title: String,
     description: String,
@@ -36,7 +37,12 @@ const serviceSchema = new Schema({
         src: String,
         type: String
     }],
-    status: String
+    orderedBy: String,
+    client: String,
+    paymentstatus: String,
+    projectStatus: String,
+    deliveryStatus: String,
+    orderDate :Date
 });
 
 module.exports = mongoose.model("Service", serviceSchema)

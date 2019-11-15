@@ -132,3 +132,6 @@ nav{
 body{
     font-family: 'Poppins', sans-serif;
 }
+.card{
+    max-height: 100%;
+}

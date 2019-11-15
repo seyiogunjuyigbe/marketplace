@@ -13,10 +13,9 @@ const userSchema = new Schema({
     isBuyer: Boolean,
     messages: [],
     favourites: [],
-    purchases: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Purchase"
-    }],
+    purchases: [],
+    orders: [],
+    balance:{type: Number, default: 0},
     seller_profile: {
         skills: [{
             name:String,
