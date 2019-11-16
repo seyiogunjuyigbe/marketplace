@@ -6,17 +6,41 @@
 .card{
     float: left;
     margin: 10px;
-    display: flex;
+    display: grid;
 }
-.card-title{
-    font-size: 1em;
+html{
+    scroll-behavior: smooth;
+}
+#hero{
+    background-image: url("../img/job2.png");
+    background-size: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.mb-2{
+    /* width: 60% !important; */
+    margin: 0 auto;
+    padding: 25%;
+}
+a.input-group-text:hover{
+text-decoration: none;
 }
 </style>
+<% if(!user){ %>
+<div id="hero" class="">
+        <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Find a job" aria-label="Job Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <a href="#services" class="input-group-text btn-primary" id="basic-addon2">Search</a>
+                </div>
+              </div>
+</div>
+<% } %>
 <div class="row">
     <div class = col-lg-3>
 
     </div>
-    <div class="col-lg-9">
+    <div id="services" class="col-lg-9">
        <% if(services){ %>
             <% services.forEach((service)=>{ %>
                 <div class="card" style="width: 30%;">
@@ -26,19 +50,18 @@
                        <% const imgArr = ["/img/product1.jpg", "/img/product2.jfif", "/img/product3.jpg"] %>
                         <img class="card-img-top" src=<%=pick(imgArr)%> alt="">
                         <div class="card-body">
-                          <h5 class="card-title"><%=service.title%></h5>
-                          <span class="card-subtitle mb-2 text-muted">Category: <%=service.category%></span>
-                          <% var trimmedString =service.description.substr(0, 60) %>
-                          <% trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) %>
-                         <p class="card-text"><%=trimmedString%></p>
-                         <a href="/services/<%=service._id%>/" class="card-link">Read more</a>
-                         
+                          <p class="card-title"><%=service.title%></p>
+                         <small>Seller: <%=service.seller%></small>
                         </div>
+                        <div class="card-body">
+                        <p>Starting at <%=service.price%> <%=service.currency%></p>
+                         <a href="/services/<%=service._id%>/" class="card-link">Read more</a>
+                        </div>                   
                       </div>
                       <%  })  }%>
   
 
-    </div>
+    
 
 </div>
 
