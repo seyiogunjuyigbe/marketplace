@@ -9,7 +9,7 @@ thisUser.username = req.body.username;
 User.register(thisUser, req.body.password, function(err,user){
     if(err){
         console.log(err);
-        return res.status(500).send("Server Error");
+        return res.status(500).render("register", {errMessage: err.message});
     }
         passport.authenticate("local")(req, res, function(){
             console.log("User registered");

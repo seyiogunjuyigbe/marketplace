@@ -10,7 +10,9 @@ h1,#outLink{
 <h1>Welcome Back </h1>
 
 
-
+<% if(errMessage){ %>
+    <p class="text-center text-warning"><%=errMessage%></p>
+<% } %>
 <form class="form" action="/user/login" method="POST"> 
     <input class="form-control" type="text" name = "username" placeholder="Username" required>
     <input class="form-control" type="password" name = "password" placeholder="Password" required>   

@@ -8,7 +8,9 @@
         </style>
 <h3>Signing up only takes a few seconds</h3>
 
-
+<% if(errMessage){ %>
+    <p class="text-center text-warning"><%=errMessage%></p>
+<% } %>
 <form class="form" action="/user/register" method="POST">
     <input class="form-control" type="text" name="user[firstName]" placeholder="First Name" required>
     <input class="form-control" type="text" name="user[lastName]" placeholder="Last Name" required>
