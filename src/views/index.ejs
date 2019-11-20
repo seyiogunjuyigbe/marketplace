@@ -22,8 +22,39 @@ html{
     margin: 0 auto;
     padding: 25%;
 }
-a.input-group-text:hover{
+a.input-group-text:hover, .col-sm-3 a:hover{
 text-decoration: none;
+}
+.svgImg{
+    width: 8em;
+ }
+ #explore{
+    padding: 1em;
+ }
+ .single_process{
+    margin: 50px 0;
+    position: relative;
+    text-align: center;
+    padding: 0 15px;
+ }
+ .single_process img {
+    height: 78px;
+    margin-bottom: 30px;
+    width: 85px;
+}
+
+.single_process h3 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+.single_process sub, .single_process sup {
+    background: none repeat scroll 0 0 #3392cd;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    padding: 1px 9px 4px;
+    left: 10px;
 }
 </style>
 <% if(!user){ %>
@@ -35,6 +66,85 @@ text-decoration: none;
                 </div>
               </div>
 </div>
+<div id="explore">
+<div class="text-center">
+        <h2 style="margin-top: 20px;">EXPLORE THE MARKETPLACE</h2>
+            <p>Get inspired to build your project</p>  
+  </div>
+<div class="row">
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/web-programming.svg" alt=""> <br>
+        <a href="/categories/Developing_Tech">Development</a>
+    </div>
+
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/paint-palette.svg" alt=""> <br>
+        <a href="/categories/Design_Graphics">UI Design</a>
+    </div>
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/stadistics.svg" alt=""> <br>
+        <a href="/categories/Business">Marketing</a>
+    </div>
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/smartphone.svg" alt=""> <br>
+        <a href="/categories/Mobile_Apps">Mobile Apps</a>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/graphics.svg" alt=""> <br>
+            <a href="/categories/Design_Graphics">Graphics Design</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/video-camera.svg" alt=""> <br>
+            <a href="/categories/Media">Video and Animations</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/pencil.svg" alt=""> <br>
+            <a href="/categories/Content_Copywriting">Content and Copyrighting</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/guitar.svg" alt=""> <br>
+            <a href="/categories/Music_Audio">Music and Audio</a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="single_process">
+            <img src="/img/svg/search.svg" alt="step one"> 
+            <sub>1</sub> 
+            <h3>Find the service you need</h3> 
+            <p>Compare prices, review, portfolios to select the service you are most excited to do.If you have a specific question, contact the freelancer before make order.</p>
+        </div>
+    </div> 
+    <div class="col-sm-3">
+        <div class="single_process">
+            <img src="/img/svg/note.svg" alt="step one">
+             <sup>2</sup> 
+             <h3>Supply your brief</h3> 
+             <p>Provide a job brief for the Talent to review. At this point jobdone takes payment, which is held until the job is completed and you are happy with the outcome.</p>
+            </div>
+        </div> 
+        <div class="col-sm-3">
+            <div class="single_process">
+                <img src="img/svg/partner.svg" alt="step one">
+                 <sub>3</sub> 
+                 <h3>Collaborate with an freelancer on your project</h3> 
+                 <p>Share files and feedback easily with inbuilt messaging. Your freelancer will complete the job within the agreed turnaround time.</p>
+                </div>
+            </div> 
+        <div class="col-sm-3">
+            <div class="single_process">
+                <img src="img/svg/checked.svg" alt="step one"> 
+                <sup>4</sup> 
+                <h3>Approve Job</h3> 
+                <p>Once you're happy with the work, approve the job. The freelancer will hand over all deliverables and you’re done. Too easy.</p>
+            </div>
+        </div>
+    </div>
 <% } %>
 <div class="row">
     <div class = col-lg-3>
@@ -66,3 +176,5 @@ text-decoration: none;
 </div>
 
 <% include ./partials/footer.ejs %>
+
+        

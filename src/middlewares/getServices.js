@@ -21,3 +21,13 @@ export const getThisService = (req,res)=>{
         }
     })
 }
+
+export const getByCategory = (req,res)=>{
+    Service.find({category: req.params.category}, (err,services)=>{
+        if(!err){
+            return res.status(200).render("category", {services:services})
+        } else{
+            return res.status(404).render("error")
+        }
+    })
+}

@@ -2,12 +2,13 @@ import {newUser,registerUser,editUser, loginUser,logoutUser,isLoggedIn} from "..
 import { logHelp } from "../helpers/login";
 import { renderServicePage, createService, seeMyServices, editService, deleteService } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
-import { getAllServices, getThisService } from "../middlewares/getServices";
+import { getAllServices, getThisService, getByCategory } from "../middlewares/getServices";
 import { payNow, paymentSuccess } from "../middlewares/payment";
 import { renderLandingPage } from "../middlewares/renderPage";
 import { charge } from "../controllers/stripe";
 import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
 import { findService } from "../helpers/findService";
+import { searchItem } from "../middlewares/search";
 
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
@@ -26,7 +27,8 @@ export const initRoutes = app =>{
     app.post("/user/login", loginUser, logHelp);
     app.get("/user/logout", logoutUser);
     app.get("/charge", charge);
-    app.get("/find", findService)
+    app.get("/find", findService);
+    app.get("/categories/:category", getByCategory)
     app.get("/services/:service_id/pay",isLoggedIn, payNow)
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 // Create Service
@@ -38,6 +40,7 @@ export const initRoutes = app =>{
 // View my Purchases
     app.get("/profile/purchases",isLoggedIn, getMyPurchases)
 // View my Inbox
-    app.get("/profile/inbox", isLoggedIn, getMyInbox)
+    app.get("/profile/inbox", isLoggedIn, getMyInbox);
+    // app.get("/search", searchItem)
     app.all("*", (req,res)=>{res.send("Error... resource not found")})
 }

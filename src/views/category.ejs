@@ -1,0 +1,31 @@
+<% include ./partials/header.ejs %>
+
+<div class="row">
+        <div class = col-lg-3>
+    
+        </div>
+        <div id="services" class="col-lg-9">
+           <% if(services){ %>
+                <% services.forEach((service)=>{ %>
+                    <div class="card" style="width: 30%;">
+                        <% function pick(arr){var index = Math.floor(Math.random()*arr.length);%>
+                          <%  return arr[index]; %>
+                           <% }%>
+                           <% const imgArr = ["/img/product1.jpg", "/img/product2.jfif", "/img/product3.jpg"] %>
+                            <img class="card-img-top" src=<%=pick(imgArr)%> alt="">
+                            <div class="card-body">
+                              <p class="card-title"><%=service.title%></p>
+                             <small>Seller: <%=service.seller%></small>
+                            </div>
+                            <div class="card-body">
+                            <p>Starting at <%=service.price%> <%=service.currency%></p>
+                             <a href="/services/<%=service._id%>/" class="card-link">Read more</a>
+                            </div>                   
+                          </div>
+                          <%  })  }%>
+      
+    
+        
+    
+    </div>
+<% include ./partials/footer.ejs %>
