@@ -1,37 +1,45 @@
+import { STRIPE_SECRET_KEY } from "../config/constants";
+
 const Service = require("../models/service");
 const User = require("../models/user");
 const Purchase = require("../models/purchase")
-const stripe = require("stripe")("sk_test_UcHnlZYGEETuFOM3iBYRlMTH00kOVGOz0Q");
+const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export const payNow = ( req , res ) => {
+    const token = req.body.stripeToken;
+    const chargeAmt = req.body.chargeAmt;
     Service.findById(req.params.service_id, (err,service)=>{
-        // if(err){
-        //     return res.status(404).send("Error... service not found")
-        // } else if(service.createdBy == req.user._id){
-        //         return res.status(403).send("Sorry, You can not buy your own service")
-        // }
-        // else{
-        //     User.findById(req.user._id, (err,user)=>{
-        //         if(err){
-        //             return res.status(500).send("Internal Server Error... We can't find you user account")
-        //         } else{
-                    
-        //             (async () => {
-        //                 const intent = await stripe.paymentIntents.create({
-        //                 amount: service.price,
-        //                 currency: service.currency,
-        //                 payment_method_types: ['card'],
-        //                 statement_descriptor: 'Custom descriptor',
-        //                 metadata: {
-        //                     description: service.title,
-        //                     service_provider: service.createdBy
-        //                 },
+        if(err || service == null){
+            return res.status(404).send("Error... service not found")
+        } else if(service.createdBy == req.user._id){
+            return res.status(403).send("Sorry, You can not buy your own service")
+        }
+        else{
+            User.findById(req.user._id, (err,user)=>{
+                if(err){
+                    return res.status(404).send("Sorry... We can't find you user account")
+                } else{
+                        const intent = stripe.paymentIntents.create({
+                        amount: service.price,
+                        currency: service.currency,
+                        payment_method_types: ['card'],
+                        statement_descriptor: 'Custom descriptor',
+                        metadata: {
+                            description: service.title,
+                            service_provider: service.createdBy,
+                            buyer: user._id
+                        },
 
-        //                 });
-        //             res.status(200).send(intent)
+                        }, (err,intent)=>{
+                            if(err){
+                                console.log(err)
+                            } else{
+                                console.log(intent)
+                            }
+                        });
+                    res.status(200).send(intent)
                     // res.status(200).render("checkout", {secret:intent.client_secret})
-                    // }
-                    // )();
+                    } ;
 
                 // try{
                 //   stripe.customers
@@ -55,39 +63,39 @@ export const payNow = ( req , res ) => {
                 //     res.send(err);
                 // }
     //         }
-    //         });
+            });
             
-    // }
-            User.findById(req.user.id, (err,user)=>{
-                if(err){
-                   return res.render("error", {errorMessage: "User not found"})
-                } else {
-                    Service.findById(req.params.service_id, (err,service)=>{
-                        if(!err){
-                            service.paymentstatus = "paid"
-                            service.orderedBy = user._id;
-                            service.client = user.username;
-                            service.projectStatus = "started";
-                            service.orderDate = Date.now();
-                            service.save();
-                                    User.findById(req.user._id, (err,user)=>{
-                                    user.purchases.push(service);
-                                    user.save();
-                                })
-                                User.findById(service.createdBy, (err,user)=>{
-                                    user.orders.push(service);
-                                    user.save()
-                                })
-                                    console.log(service)
+    }
+            // User.findById(req.user.id, (err,user)=>{
+            //     if(err){
+            //        return res.render("error", {errorMessage: "User not found"})
+            //     } else {
+            //         Service.findById(req.params.service_id, (err,service)=>{
+            //             if(!err){
+            //                 service.paymentstatus = "paid"
+            //                 service.orderedBy = user._id;
+            //                 service.client = user.username;
+            //                 service.projectStatus = "started";
+            //                 service.orderDate = Date.now();
+            //                 service.save();
+            //                         User.findById(req.user._id, (err,user)=>{
+            //                         user.purchases.push(service);
+            //                         user.save();
+            //                     })
+            //                     User.findById(service.createdBy, (err,user)=>{
+            //                         user.orders.push(service);
+            //                         user.save()
+            //                     })
+            //                         console.log(service)
 
-                                return res.redirect("/profile/dashboard")
-                        } else{
-                            return res.status(404).send("That service was not found!")
-                        }
+            //                     return res.redirect("/profile/dashboard")
+            //             } else{
+            //                 return res.status(404).send("That service was not found!")
+            //             }
 
-                    })
-                }
-            })
+            //         })
+            //     }
+            // })
 
 
     });

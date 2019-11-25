@@ -1,0 +1,19 @@
+<% include ./partials/header.ejs %>
+
+<h1>
+    Pay for Something
+</h1>
+<form action="/test" method="POST">
+<script src="https://checkout.stripe.com/checkout.js"
+        class="stripe-button"
+        data-key="<%=STRIPE_PUBLISH_KEY%>"
+        data-amount="200"
+        data-name="Just pay"
+        data-description="Just pay for something blah blah blah"
+        data-locale="auto"
+        data-currency="usd">
+    
+</script>
+<input type="hidden" name="chargeAmt" value="200">
+</form>
+<% include ./partials/footer.ejs %>

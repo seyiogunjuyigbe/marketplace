@@ -9,6 +9,7 @@ import { charge } from "../controllers/stripe";
 import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
 import { findService } from "../helpers/findService";
 import { searchItem } from "../middlewares/search";
+import { renderPayPAge, testPay } from "../middlewares/testPay";
 
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
@@ -29,7 +30,10 @@ export const initRoutes = app =>{
     app.get("/charge", charge);
     app.get("/find", findService);
     app.get("/categories/:category", getByCategory)
-    app.get("/services/:service_id/pay",isLoggedIn, payNow)
+    app.post("/services/:service_id/pay",isLoggedIn, payNow);
+    app.get("/test", renderPayPAge);
+    app.post("/test", payNow);
+    app.get("/testSuccess", (req,res)=>{res.send("Payment Successful")})
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 // Create Service
     app.post("/profile/services/new", isLoggedIn, createService)

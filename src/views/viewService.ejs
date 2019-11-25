@@ -58,8 +58,21 @@ img{
                     <p>Seller: <%=service.seller%></p>
             </div>
             <div class="modal-footer">
+
               <button type="button" class="btn btn-secondary" data-dismiss="modal">No, that was a mistake</button>
-              <a href="/services/<%=service._id%>/pay" class="btn btn-success">Yes, I want to pay!</a>
+              <form action="/services/<%=service._id%>/pay" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="<%=STRIPE_PUBLISH_KEY%>"
+                        data-amount="<%=service.price%>"
+                        data-name="<%=service.title%>"
+                        data-description="<%=service.description%>"
+                        data-locale="auto"
+                        data-currency="<%=service.currency%>">
+                    
+                </script>
+                <input type="hidden" name="chargeAmt" value="<%=service.amount%>">
+                </form>
             </div>
           </div>
         </div>

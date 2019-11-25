@@ -1,3 +1,5 @@
+import { STRIPE_PUBLISH_KEY } from "../config/constants";
+
 const Service = require("../models/service");
 
 export const getAllServices =(req,res)=>{
@@ -17,7 +19,7 @@ export const getThisService = (req,res)=>{
         return res.status(404).render("error",{errorMessage:"Error... Not found!"})
 
         } else{
-            return res.status(200).render("viewService", {service:thisService})
+            return res.status(200).render("viewService", {service:thisService, STRIPE_PUBLISH_KEY:STRIPE_PUBLISH_KEY})
         }
     })
 }
