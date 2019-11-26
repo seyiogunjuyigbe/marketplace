@@ -1,7 +1,7 @@
-.dropdown-menu, .bg-dark, .list-group, .list-group-item{
-    background-color: #2A4B8B !important;
+.dropdown-menu, .bg-dark,{
+    background-color: #020202;
 }
-.dropdown-menu a, .nav-link{
+#mySidenav .dropdown-menu a, #mySidenav  .nav-link{
     color: #fff;
 }
 .nav-link:hover{
@@ -23,13 +23,21 @@ width: 0; /* 0 width - change this with JavaScript */
 position: fixed; /* Stay in place */
 z-index: 1; /* Stay on top */
 top: 0; /* Stay at the top */
-background-color: #2A4B8B; /* Black*/
+background-color: #020202; /* Black*/
 overflow-x: hidden; /* Disable horizontal scroll */
 padding-top: 60px; /* Place content 60px from the top */
 transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 right: 0;
 }
-
+#avatar{
+    width: 3em;
+}
+#profileLink{
+    color: #fff;
+}
+#profileLink:hover{
+    background-color: #020202;
+}
 /* The navigation menu links */
 .sidenav a {
 /* padding: 8px 8px 8px 32px; */
@@ -134,4 +142,10 @@ body{
 }
 .card{
     max-height: 100%;
+}
+.list-group-item{
+    background-color: darkgrey !important;
+}
+#dashnav .nav-link{
+    color: #000 !important;
 }

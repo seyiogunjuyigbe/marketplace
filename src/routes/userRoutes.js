@@ -16,7 +16,6 @@ export const initRoutes = app =>{
     app.get("/user/register", (req,res)=>res.render("register", {errMessage: null}));
     app.get("/user/login", (req,res)=>res.render("login", {errMessage: null}));
     app.get("/profile/user/profile", isLoggedIn, myProfile);
-    app.get("/profile/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
     app.get("/profile/services/new", isLoggedIn, renderServicePage);
     app.get("/profile/myservices", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);

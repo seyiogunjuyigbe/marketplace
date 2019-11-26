@@ -82,6 +82,7 @@ export const payNow = ( req , res ) => {
                                             res.status(500).send("Internal Server Error")
                                         } else{
                                             user.purchases.push(purchase);
+                                            user.isBuyer = true;
                                             serviceOwner.orders.push(purchase)
                                             serviceOwner.balance += (charge.amount/100);
                                             purchase.save();

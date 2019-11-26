@@ -25,6 +25,7 @@ export const createService = (req,res)=>{
         service.seller = user.username;
         service.save();
         user.services.push(service);
+        user.isSeller = true;
         user.save()
         return res.status(200).render("viewService", {service:service})
         

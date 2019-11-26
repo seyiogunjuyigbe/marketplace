@@ -1,21 +1,61 @@
 <% include ./partials/header.ejs %>
+<div class="row">
+
 <div class="col-lg-3 col-sm-4">
         <div class="card" style="width: 18rem;">
-                <img src="" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"><%=user.firstName%> <%=user.lastName%></h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <img src="/img/avatar-bg.png" class="card-img-top" style="width:5em; margin:0 auto;" alt="...">
+                <div class="card-body text-center">
+                  <h5 class="card-title"><%=user.username%></h5>
+                  <p class="card-text">Joined <%=user.joinDate%></p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Cras justo odio</li>
-                  <li class="list-group-item">Dapibus ac facilisis in</li>
-                  <li class="list-group-item">Vestibulum at eros</li>
+                <ul id="userDetails" class="list-group list-group-flush">
+                  <li class="list-group-item">0 Jobs Done</li>
+                  <li class="list-group-item">0 Repeat Clients</li>
+                  <li class="list-group-item">39 minutes Avg. Response Time</li>
+                  <li class="list-group-item">$10000 Hourly Rate</li>
+
                 </ul>
+
+ 
+
+ 
+
                 <div class="card-body">
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <a href="#" class="card-link"><i class="fab fa-linkedin"></i></a>
+                  <a href="#" class="card-link"><i class="fab fa-facebook"></i></a>
                 </div>
               </div> 
 </div>
+<div class="col-lg-6 col-sm-8" style="margin-left:2em;">
+        
+    <div class="container">
+<ul id="dashNav" class="nav">
+                <li class="nav-item active"><a class="nav-link" href="/profile/user/profile">Dashboard</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/purchases">Buying</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile/orders">Selling</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile/inbox">Inbox</a></li>
+              </ul>
+            
+<h1>
+    Services
+</h1>
+<% if(user.services.length >1){ %>
+    <ul class="list-group">
+        <% user.services.forEach((service)=>{%>
+        <li class="list-group-item">
+            <%=service.title%></a>
+        </li>   
+   <% })%>   
+    </ul>
+
+<%} else{%>
+    <p>This user has no services</p>
+    <%}%>
+</div>
+</div>
+
+
+
  <% include ./partials/footer.ejs %>
 

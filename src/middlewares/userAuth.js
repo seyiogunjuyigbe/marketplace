@@ -6,6 +6,7 @@ const passport = require("passport");
 export const registerUser = (req,res)=>{
 let thisUser = new User(req.body.user);
 thisUser.username = req.body.username;
+thisUser.joinDate = Date.now();
 User.register(thisUser, req.body.password, function(err,user){
     if(err){
         console.log(err);
@@ -13,7 +14,7 @@ User.register(thisUser, req.body.password, function(err,user){
     }
         passport.authenticate("local")(req, res, function(){
             console.log("User registered");
-            return res.status(200).render("dashboard", {user:user})
+            return res.redirect("/profile/user/profile")
            })
 
 })
@@ -23,7 +24,7 @@ User.register(thisUser, req.body.password, function(err,user){
 //Login
 export const loginUser = 
     passport.authenticate("local", {
-        successReturnToOrRedirect:'/',
+        successReturnToOrRedirect:'/profile/user/profile',
         failureRedirect: "/user/login"
     }) 
 
