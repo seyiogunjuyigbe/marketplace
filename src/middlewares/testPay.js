@@ -22,7 +22,3 @@ const charge = stripe.charges.create({
 console.log("payment successful")
 res.redirect("/testSuccess")
 }
-export const renderPayPAge = (req,res)=>{
-    res.render("test", {STRIPE_PUBLISH_KEY: STRIPE_PUBLISH_KEY,
-                            STRIPE_SECRET_KEY: STRIPE_SECRET_KEY})
-}

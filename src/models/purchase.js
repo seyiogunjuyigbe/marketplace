@@ -1,29 +1,18 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const purchaseSchema = new Schema({
-    service: String,
-    owner: String,
+    title: String,
+    serviceID: String,
+    sellerID: String,
+    seller: String,
+    buyerID: String,
     buyer: String,
-    transaction: {
-        id: String,
-        intent: String,
-        payer: {payment_method: String},
-        transactions : [
-           { amount: {
-                total: Number,
-                currency: String
-            },
-            description: String,
-        related_resources: [] } ],
-        create_time: Date,
-        links:[{
-            href: String,
-            rel: String,
-            method: String 
-        }],
-        httpStatusCode: Number    
-    },
+    transaction: String,
+    balance_transaction: String,
     createdAt: Date,
-    status: String
+    status: String,
+    projectStatus : String,
+    deliveryTime: Number, 
+    deliveryStatus: String
 })
 module.exports = mongoose.model("Purchase", purchaseSchema)

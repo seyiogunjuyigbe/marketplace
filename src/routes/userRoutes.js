@@ -3,19 +3,19 @@ import { logHelp } from "../helpers/login";
 import { renderServicePage, createService, seeMyServices, editService, deleteService } from "../middlewares/services";
 import { myProfile } from "../middlewares/myProfile";
 import { getAllServices, getThisService, getByCategory } from "../middlewares/getServices";
-import { payNow, paymentSuccess } from "../middlewares/payment";
+import { payNow, paymentSuccess, renderPayPAge } from "../middlewares/payment";
 import { renderLandingPage } from "../middlewares/renderPage";
 import { charge } from "../controllers/stripe";
 import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
 import { findService } from "../helpers/findService";
 import { searchItem } from "../middlewares/search";
-import { renderPayPAge, testPay } from "../middlewares/testPay";
-
+// import { renderPayPAge, testPay } from "../middlewares/testPay";
+import {ensureLoggedIn} from "connect-ensure-login";
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
     app.get("/user/register", (req,res)=>res.render("register", {errMessage: null}));
     app.get("/user/login", (req,res)=>res.render("login", {errMessage: null}));
-    app.get("profile/user/profile", myProfile);
+    app.get("/profile/user/profile", isLoggedIn, myProfile);
     app.get("/profile/dashboard", isLoggedIn, (req,res)=>res.render("dashboard"));
     app.get("/profile/services/new", isLoggedIn, renderServicePage);
     app.get("/profile/myservices", isLoggedIn, seeMyServices);
@@ -30,10 +30,9 @@ export const initRoutes = app =>{
     app.get("/charge", charge);
     app.get("/find", findService);
     app.get("/categories/:category", getByCategory)
+    app.get("/services/:service_id/pay",ensureLoggedIn('/user/login'), renderPayPAge);
     app.post("/services/:service_id/pay",isLoggedIn, payNow);
-    app.get("/test", renderPayPAge);
-    app.post("/test", payNow);
-    app.get("/testSuccess", (req,res)=>{res.send("Payment Successful")})
+       app.get("/testSuccess", (req,res)=>{res.send("Payment Successful")})
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 // Create Service
     app.post("/profile/services/new", isLoggedIn, createService)

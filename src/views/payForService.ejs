@@ -1,0 +1,58 @@
+<% include ./partials/header.ejs %>
+<style>
+.stripe-button-el{
+    margin-left: -50% !important;
+}
+</style>
+<div class="container">
+    <h1>Order Details</h1>
+    <table class="table">
+        <tr>
+            <td>Service Name:</td>
+            <td><%=service.title%></td>
+        </tr>
+          <tr>
+            <td>Service Provider:</td>
+            <td><%=service.seller%></td>
+        </tr>
+          <tr>
+            <td>Delivery Time:</td>
+            <td><%=service.deliveryTime%></td>
+        </tr>
+        <tr>
+            <td>Revision Count:</td>
+            <td><%=service.revisionCount%></td>
+        </tr>
+          <tr>
+            <td>Service Price:</td>
+            <td><%=service.price%></td>
+        </tr>
+    </table>
+</div>
+<div class="container">
+    <h1>Pay With Stripe</h1>
+<div id="stripePay">
+        <form action="/services/<%=service._id%>/pay" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js"
+                    class="stripe-button"
+                    data-key="<%=STRIPE_PUBLISH_KEY%>"
+                    data-amount="<%=service.price*100%>"
+                    data-name="Pay for Service"
+                    data-description="<%=service.title%> /n /t Author: <%=service.seller%>"
+                    data-locale="auto"
+                    data-currency="<%=service.currency%>">
+                
+            </script>
+        
+            <input type="hidden" name="chargeAmt" value="<%=service.price*100%>">
+            
+           
+            </form>
+</div>
+   
+</div>
+
+
+
+    
+<% include ./partials/footer.ejs %>

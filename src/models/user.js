@@ -11,6 +11,7 @@ const userSchema = new Schema({
     email: String,
     isSeller: Boolean,
     isBuyer: Boolean,
+    joinDate: Date,
     messages: [],
     favourites: [],
     purchases: [],

@@ -55,6 +55,20 @@ app.use(function(req, res, next){
     next();
 })
 
+
+String.prototype.startsWith = function(needle)
+{
+  return(this.indexOf(needle) == 0)
+}
+
+app.use(function(req, res, next) {
+  if ( !(req.path == '/login' || req.path.startsWith('/auth/')) && req.session.returnTo) {
+    delete req.session.returnTo
+  }
+  next()
+})
+
+
 initRoutes(app)
 
 const PORT = process.env.PORT || 3000;

@@ -1,23 +1,28 @@
 <% include ./partials/dash_header.ejs %>
-                              
+                     <div class="container" style="max-width:80%;">
+
+                            
                             <table class="table">
                               <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">SELLER</th>
-                                  <th scope="col">SERVICE</th>
+                                    <th scope="col">SERVICE</th>
+                                  <th scope="col">SELLER</th>
                                   <th scope="col">ORDERED</th>
                                   <th scope="col">DUE IN</th>
-                                  <th scope="col">STATUS</th>
+                                  <th scope="col">PAYMENT STATUS</th>
+                                  <th scope="col">PROJECT STATUS</th>
+
 
                                 </tr>
                                 </thead>
                                         <tbody>
                                             <% user.purchases.forEach((purchase)=>{ %>
                                                 <tr>
-                                                    <td><%=purchase.seller%></td>
                                                     <td><%=purchase.title%></td>
-                                                    <td><%=purchase.orderDate%></td>
+                                                    <td><%=purchase.seller%></td>
+                                                    <td><%=purchase.createdAt%></td>
                                                     <td><%=purchase.deliveryTime%> days</td>
+                                                    <td><%=purchase.status%></td>
                                                     <td><%=purchase.projectStatus%></td>
                                                     
                                                     
@@ -26,7 +31,7 @@
                                         </tbody>
                                       </table>
                                         
-                            
+                                    </div>
 
  <% include ./partials/dash_footer.ejs %>
 

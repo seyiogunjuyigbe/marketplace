@@ -1,15 +1,42 @@
-import { STRIPE_SECRET_KEY } from "../config/constants";
+import { STRIPE_SECRET_KEY, STRIPE_PUBLISH_KEY } from "../config/constants";
 
 const Service = require("../models/service");
 const User = require("../models/user");
 const Purchase = require("../models/purchase")
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
+export const renderPayPAge = (req,res)=>{
+    User.findById(req.user._id, (err,user)=>{
+        if(err || user == undefined){
+            res.status(404).render("error", {errMessage: "Sorry, we couldn't find your profile"})
+        } else{
+            Service.findById(req.params.service_id, (err,service)=>{
+                if(err || service == undefined){
+                    return res.status(404).render("error", {errorMessage: "Service not found!"})
+        
+                } else{
+                     res.render("payForService", {
+        STRIPE_PUBLISH_KEY: STRIPE_PUBLISH_KEY,
+        STRIPE_SECRET_KEY: STRIPE_SECRET_KEY, 
+        user:user,
+        service:service
+
+    })
+                }
+            })
+            
+        }
+    })
+   
+
+   
+}
+
 export const payNow = ( req , res ) => {
     const token = req.body.stripeToken;
     const chargeAmt = req.body.chargeAmt;
     Service.findById(req.params.service_id, (err,service)=>{
-        if(err || service == null){
+        if(err || service == undefined){
             return res.status(404).send("Error... service not found")
         } else if(service.createdBy == req.user._id){
             return res.status(403).send("Sorry, You can not buy your own service")
@@ -17,88 +44,66 @@ export const payNow = ( req , res ) => {
         else{
             User.findById(req.user._id, (err,user)=>{
                 if(err){
-                    return res.status(404).send("Sorry... We can't find you user account")
+                    return res.status(404).send("Sorry... We can't find your user account")
                 } else{
-                        const intent = stripe.paymentIntents.create({
-                        amount: service.price,
-                        currency: service.currency,
-                        payment_method_types: ['card'],
-                        statement_descriptor: 'Custom descriptor',
-                        metadata: {
-                            description: service.title,
-                            service_provider: service.createdBy,
-                            buyer: user._id
-                        },
-
-                        }, (err,intent)=>{
+                 User.findById(service.createdBy, (err,serviceOwner)=>{
+                     if(err || serviceOwner == undefined){
+                         return res.status(404).render("error", {errMessage: "Sorry, but somehw we couldn't find the owner of that service"})
+                     } else{
+                        const token = req.body.stripeToken;
+                        const chargeAmt = req.body.chargeAmt;
+                        const charge = stripe.charges.create({
+                            amount: chargeAmt,
+                            currency: "usd",
+                            source: token
+                        }, (err,charge)=>{
                             if(err){
-                                console.log(err)
-                            } else{
-                                console.log(intent)
-                            }
+                                console.log(err.message)
+                                res.send(err.message)
+    
+                             } 
+                           else{
+                                if(charge.paid == true && charge.status == "succeeded"){
+                                    Purchase.create({
+                                        title: service.title,
+                                        serviceID: service._id,
+                                        sellerID: service.createdBy,
+                                        seller: service.seller,
+                                        deliveryTime: service.deliveryTime,
+                                        buyerID: req.user._id,
+                                        buyer: req.user.username,
+                                        transaction: charge.id,
+                                        balance_transaction: charge.balance_transaction,
+                                        createdAt: Date.now(),
+                                        status: "paid",
+                                        projectStatus : "started"
+                                    },(err,purchase)=>{
+                                        if(err){
+                                            res.status(500).send("Internal Server Error")
+                                        } else{
+                                            user.purchases.push(purchase);
+                                            serviceOwner.orders.push(purchase)
+                                            serviceOwner.balance += (charge.amount/100);
+                                            purchase.save();
+                                            user.save();
+                                            serviceOwner.save();
+                                            console.log(purchase)
+                                        }
+                                    })
+                                    res.redirect("/profile/purchases")
+                                }
+                            }                    
                         });
-                    res.status(200).send(intent)
-                    // res.status(200).render("checkout", {secret:intent.client_secret})
-                    } ;
+                        console.log("payment successful")
+                     }
+                 })
+            }  
+                }) ;
 
-                // try{
-                //   stripe.customers
-                //             .create({
-                //                 email: user.email,
-                //                 phone: user.phone,
-                //                 name: `${user.firstName} ${user.lastName}`,
-                //             })
-                //             .then(customer=>
-                //                 stripe.charges.create({
-                //                 amount: service.price,
-                //                 currency: "usd",
-                //                 customer: customer.id,
-                //                 receipt_email: customer.email,
-                //                 receipt_number: customer.phone,
-                //                 })
-                //             )
-                //         .then((charge)=>res.send(`This is the charge ${charge}`))
-                //         .catch(err=>res.send(err))
-                // } catch(err){
-                //     res.send(err);
-                // }
-    //         }
-            });
+            };
             
-    }
-            // User.findById(req.user.id, (err,user)=>{
-            //     if(err){
-            //        return res.render("error", {errorMessage: "User not found"})
-            //     } else {
-            //         Service.findById(req.params.service_id, (err,service)=>{
-            //             if(!err){
-            //                 service.paymentstatus = "paid"
-            //                 service.orderedBy = user._id;
-            //                 service.client = user.username;
-            //                 service.projectStatus = "started";
-            //                 service.orderDate = Date.now();
-            //                 service.save();
-            //                         User.findById(req.user._id, (err,user)=>{
-            //                         user.purchases.push(service);
-            //                         user.save();
-            //                     })
-            //                     User.findById(service.createdBy, (err,user)=>{
-            //                         user.orders.push(service);
-            //                         user.save()
-            //                     })
-            //                         console.log(service)
-
-            //                     return res.redirect("/profile/dashboard")
-            //             } else{
-            //                 return res.status(404).send("That service was not found!")
-            //             }
-
-            //         })
-            //     }
-            // })
-
-
-    });
+    })
+         
 }
     export const paymentSuccess = (req,res) =>{
                                Service.findById(req.params.service_id, (err,service)=>{

@@ -19,10 +19,11 @@ User.register(thisUser, req.body.password, function(err,user){
 })
 }
 
+
 //Login
 export const loginUser = 
     passport.authenticate("local", {
-        successRedirect:'/',
+        successReturnToOrRedirect:'/',
         failureRedirect: "/user/login"
     }) 
 

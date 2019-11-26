@@ -9,3 +9,13 @@ export const findService= (req,res)=>{
         }
     })
 }
+
+export const findThisService= (req,res,next)=>{
+    Service.findById(req.params.service_id, (err,service)=>{
+        if(err || service == null){
+            return res.status(404).render("error", {errorMessage: "Service not found!"})
+
+        } else{
+            next()        }
+    })
+}
