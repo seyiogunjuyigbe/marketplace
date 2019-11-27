@@ -14,7 +14,7 @@ User.register(thisUser, req.body.password, function(err,user){
     }
         passport.authenticate("local")(req, res, function(){
             console.log("User registered");
-            return res.redirect("/profile/user/profile")
+            return res.redirect("/profile/dashboard")
            })
 
 })
@@ -24,7 +24,7 @@ User.register(thisUser, req.body.password, function(err,user){
 //Login
 export const loginUser = 
     passport.authenticate("local", {
-        successReturnToOrRedirect:'/profile/user/profile',
+        successReturnToOrRedirect:'/profile/dashboard',
         failureRedirect: "/user/login"
     }) 
 

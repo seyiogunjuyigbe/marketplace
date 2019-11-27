@@ -15,19 +15,18 @@ export const initRoutes = app =>{
     app.get("/", renderLandingPage);
     app.get("/user/register", (req,res)=>res.render("register", {errMessage: null}));
     app.get("/user/login", (req,res)=>res.render("login", {errMessage: null}));
-    app.get("/profile/user/profile", isLoggedIn, myProfile);
+    app.get("/profile/dashboard", isLoggedIn, myProfile);
     app.get("/profile/services/new", isLoggedIn, renderServicePage);
     app.get("/profile/myservices", isLoggedIn, seeMyServices);
     app.get("/services/all", getAllServices);
     app.get("/services/:service_id", getThisService);
     app.get("/user/:id/services/:service_id/edit", isLoggedIn, editService);
     app.get("/user/:id/services/:service_id/delete", isLoggedIn, deleteService)
-    // app.get("/user/login/success", (req,res)=>res.send(`${req.user} Logged in successfully!`))
     app.post("/user/register", registerUser);
     app.post("/user/login", loginUser, logHelp);
     app.get("/user/logout", logoutUser);
     app.get("/charge", charge);
-    app.get("/find", findService);
+    app.get("/search", findService);
     app.get("/categories/:category", getByCategory)
     app.get("/services/:service_id/pay",ensureLoggedIn('/user/login'), renderPayPAge);
     app.post("/services/:service_id/pay",isLoggedIn, payNow);

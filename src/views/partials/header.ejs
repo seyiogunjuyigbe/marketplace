@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,9 +22,19 @@
     <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-        
+        <style>
+          #navbarDropdown{
+
+            cursor: pointer;
+          }
+          #authLinks a{
+            color: #fff;
+          }
+          </style>
                 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <a class="navbar-brand" href="/">Marketplace</a>
+                    <a class="navbar-brand" href="/">
+                    <img src="/img/logo_trans.png" alt="">
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -28,13 +46,14 @@
                             Browse 
                           </span>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Business</a>
-                            <a class="dropdown-item" href="#">Content & Copywriting</a>
-                            <a class="dropdown-item" href="#">Design & Graphics</a>
-                            <a class="dropdown-item" href="#">Developing & Tech</a>
-                            <a class="dropdown-item" href="#">Ecommerce & CMS</a>
-                            <a class="dropdown-item" href="#">Internet Marketing</a>
-                            <a class="dropdown-item" href="#">Video & Audio </a>
+                              <a class="dropdown-item" href="/categories/Developing_Tech">Development</a>
+                              <a class="dropdown-item" href="/categories/Design_Graphics">UI Design</a>
+                              <a class="dropdown-item" href="/categories/Business">Marketing</a>
+                              <a class="dropdown-item" href="/categories/Mobile_Apps">Mobile Apps</a>
+                              <a class="dropdown-item" href="/categories/Design_Graphics">Graphics Design</a>
+                              <a class="dropdown-item" href="/categories/Media">Video and Animations</a>
+                              <a class="dropdown-item" href="/categories/Content_Copywriting">Content and Copyrighting</a>
+                              <a class="dropdown-item" href="/categories/Music_Audio">Music and Audio</a>
                             
                         </div>
                         </li>
@@ -42,7 +61,7 @@
                             <input id="navSearch" class="form-control mr-sm-2" type="search" name="search" placeholder="Search for a service" aria-label="Search">
                           </form>
                       </ul>
-                      <ul class="nav justify-content-end">
+                      <ul id="authLinks" class="nav justify-content-end">
                     <%if (!user){ %>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/register">Sign Up</a>
@@ -55,7 +74,7 @@
                                 </li>
                    <% } else{%>
                     <li class="nav-item">
-                            <a id="profileLink" style="font-weight:bold;" class="nav-link" href="/profile/user/profile">
+                            <a id="profileLink" style="font-weight:bold;" class="nav-link" href="/profile/dashboard">
                               <img id="avatar" src="/img/avatar-bg.png" alt="">
                              <% if(user.isSeller == true){ %>
                                 <span>$ <%=user.balance%></span>

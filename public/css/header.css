@@ -149,3 +149,6 @@ body{
 #dashnav .nav-link{
     color: #000 !important;
 }
+.navbar-brand img{
+    width: 3em;
+}

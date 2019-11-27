@@ -1,7 +1,8 @@
 const Service = require("../models/service");
 
 export const findService= (req,res)=>{
-    Service.find({title: req.query}, (err,found)=>{
+    console.log(req.query)
+    Service.find({title: req.query.search}, (err,found)=>{
         if(!err){
             return res.status(200).render("index", {services:found})
         } else{
