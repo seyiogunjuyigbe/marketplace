@@ -40,9 +40,9 @@
 <h1>
     Services
 </h1>
-<% if(user.services.length >1){ %>
+<% if(services.length >=1){ %>
     <ul class="list-group">
-        <% user.services.forEach((service)=>{%>
+        <% services.forEach((service)=>{%>
         <li class="list-group-item">
             <%=service.title%></a>
         </li>   
