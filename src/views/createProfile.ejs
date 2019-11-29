@@ -1,4 +1,20 @@
 <% include ./partials/header.ejs %>
 
+<style>
+::placeholder{
+    font-style: italic;
+    font-weight: 400;
+}
+
+</style>
+<form action="/profile/create" method="POST">
+    <label for="title">Title</label>
+<input type="text" id="title" class="form-control" placeholder="What best describes you? E.g 'Full Stack Developer'" name="description[title]" required>
+<label for="description">Description</label>
+<textarea class="form-control" placeholder="Be a little bit more elaborate about yourself" name="description[description]" id="description" cols="30" rows="10" required></textarea>
+<label for="rate">Your Average Rate</label>
+<input type="text" name="description[rate]" id="rate" class="form-control" pattern="[1-9]+" required>
+<input type="submit" value="Save Changes">
+</form>
 
 <% include ./partials/footer.ejs %>

@@ -46,3 +46,10 @@ export const isLoggedIn = (req,res,next)=>{
         res.redirect("/user/login");
         }
         
+// Check if user is logged in and owns resource
+export const isLoggedInAndOwner = (req,res,next)=>{
+    if(req.isAuthenticated() ){
+    return next();
+}
+res.redirect("/user/login");
+}

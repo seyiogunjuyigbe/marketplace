@@ -9,21 +9,25 @@ const methodOverride = require('method-override');
 const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const google = require('googleapis');
+
+
 import {initRoutes} from "./routes/userRoutes"
 import path from 'path';
 import {SECRET_KEY} from "./config/constants"
+
+
 const User = require("./models/user")
 const Service = require("./models/service")
+
+
 app.set('views', path.join(__dirname, 'views')) // Redirect to the views directory inside the src directory
 app.use(express.static(path.join(__dirname, '../public'))); // load local css and js files
 app.set('view engine', 'ejs'); 
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.use(methodOverride("_method"));
-
-
 
 // PASSPORT CoNFIG
 app.use(require("express-session")({
@@ -32,24 +36,37 @@ app.use(require("express-session")({
     saveUninitialized: false, 
     expires: new Date(Date.now() + (30 * 86400 * 1000))
 }));
-// app.set('trust proxy', 1) // trust first proxy
- 
-
-// app.use(require('cookie-session')({
-//     name: 'session',
-//     keys: ['key1', 'key2'],
-//     maxAge: new Date(Date.now() + (30 * 86400 * 1000)),
-//     expires: new Date(Date.now() + (30 * 86400 * 1000))
-// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use("local", new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(passport.initialize());
-app.use(passport.session());
+
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+      profileFields: ["email", "name"]
+    },
+    function(accessToken, refreshToken, profile, done) {
+      const { email, first_name, last_name } = profile._json;
+      const userData = {
+        email,
+        firstName: first_name,
+        lastName: last_name
+      };
+      new userModel(userData).save();
+      done(null, profile);
+    }
+  )
+);
+
 
 app.use(function(req, res, next){
     res.locals.user = req.user;
