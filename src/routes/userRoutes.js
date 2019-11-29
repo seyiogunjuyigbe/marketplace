@@ -25,12 +25,10 @@ export const initRoutes = app =>{
     app.post("/user/register", registerUser);
     app.post("/user/login", loginUser, logHelp);
     app.get("/user/logout", logoutUser);
-    app.get("/charge", charge);
     app.get("/search", findService);
     app.get("/categories/:category", getByCategory)
     app.get("/services/:service_id/pay",ensureLoggedIn('/user/login'), renderPayPAge);
     app.post("/services/:service_id/pay",isLoggedIn, payNow);
-       app.get("/testSuccess", (req,res)=>{res.send("Payment Successful")})
     // app.get("/services/:service_id/payment/success",isLoggedIn, paymentSuccess)
 // Create Service
     app.post("/profile/services/new", isLoggedIn, createService)
@@ -43,5 +41,5 @@ export const initRoutes = app =>{
 // View my Inbox
     app.get("/profile/inbox", isLoggedIn, getMyInbox);
     // app.get("/search", searchItem)
-    app.all("*", (req,res)=>{res.send("Error... resource not found")})
+    app.all("*", (req,res)=>{res.render("error", {errorMessage:"Error... resource not found"})})
 }

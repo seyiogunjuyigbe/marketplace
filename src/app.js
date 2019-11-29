@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
+const nodemailer = require('nodemailer')
 import {initRoutes} from "./routes/userRoutes"
 import path from 'path';
 import {SECRET_KEY} from "./config/constants"
