@@ -3,9 +3,6 @@ import cloudinary from 'cloudinary';
 
 export const storage = cloudinaryStorage({
   cloudinary,
-  folder: 'itarj',
-  transformation: [{
-    width: 500, height: 250, crop: 'scale', quality: 'auto'
-  }],
-  allowedFormats: ['jpg', 'jpeg', 'png'],
+  folder: 'marketplace',
+  allowedFormats: ['jpg', 'png', 'mp4', 'mp3', 'zip', 'pdf', 'doc', 'txt'],
 });

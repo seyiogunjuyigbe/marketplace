@@ -10,7 +10,9 @@ import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
 import { findService } from "../helpers/findService";
 import { searchItem } from "../middlewares/search";
 import {ensureLoggedIn} from "connect-ensure-login";
-import{getGoogle, googleAuth} from "../middlewares/googleAuth";
+import{ googleLogin, googleCallback} from "../middlewares/googleAuth";
+import{facebookLogin, facebookCallback} from "../middlewares/facebookAuth";
+
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
     // AUTH ROUTES
@@ -22,8 +24,11 @@ export const initRoutes = app =>{
 
 
     // SOCIAL AUTH
-    app.get("/auth/google", getGoogle);
-    app.get("/auth/google/callback", googleAuth)
+    app.get("/auth/google", googleLogin);
+    app.get("/auth/google/callback", googleCallback)
+
+    app.get("/auth/facebook", facebookLogin);
+    app.get("/auth/facebook/callback", facebookCallback)
     // USER ROUTES
     app.get("/profile/create", isLoggedIn, createProfilePage);
     app.post("/profile/create", isLoggedIn, createProfile)

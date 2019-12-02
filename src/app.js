@@ -10,13 +10,18 @@ const flash = require("connect-flash");
 const request = require("request");
 const db = require('./database/db');
 const nodemailer = require('nodemailer');
-const google = require('googleapis');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 
+import { storage } from './helpers/cloudinaryStorage';
+const parser = multer({ storage });
 
 import {initRoutes} from "./routes/userRoutes"
 import path from 'path';
-import {SECRET_KEY} from "./config/constants"
-
+import {SECRET_KEY, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, DOMAIN_NAME} from "./config/constants"
+import cloudinaryConfig from "./config/constants"
 
 const User = require("./models/user")
 const Service = require("./models/service")
@@ -44,30 +49,6 @@ passport.use("local", new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-      profileFields: ["email", "name"]
-    },
-    function(accessToken, refreshToken, profile, done) {
-      const { email, first_name, last_name } = profile._json;
-      const userData = {
-        email,
-        firstName: first_name,
-        lastName: last_name
-      };
-      new userModel(userData).save();
-      done(null, profile);
-    }
-  )
-);
-
-
 app.use(function(req, res, next){
     res.locals.user = req.user;
     next();
@@ -79,12 +60,12 @@ String.prototype.startsWith = function(needle)
   return(this.indexOf(needle) == 0)
 }
 
-app.use(function(req, res, next) {
-  if ( !(req.path == '/login' || req.path.startsWith('/auth/')) && req.session.returnTo) {
-    delete req.session.returnTo
-  }
-  next()
-})
+// app.use(function(req, res, next) {
+//   if ( !(req.path == '/login' || req.path.startsWith('/auth/')) && req.session.returnTo) {
+//     delete req.session.returnTo
+//   }
+//   next()
+// })
 
 
 initRoutes(app)

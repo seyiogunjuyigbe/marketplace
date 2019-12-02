@@ -1,21 +1,12 @@
-
-const passport = require('passport');
-const User = require ("../models/user");
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-import {GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET, DOMAIN_NAME} from "../config/constants";
-
-passport.use(new GoogleStrategy({
-  clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://${DOMAIN_NAME}/auth/google/callback`
-  },
-  (accessToken,
+export const googleHelp = (accessToken,
     refreshToken,
     profile,
     done) => {
+
     User.findOne({googleID: profile.id})
         .then(currentUser => {
-                if(!currentUser) {
+          console.log(profile)
+            if(!currentUser) {
                 let newUser = {
                     username: profile.displayName,
                     googleID: profile.id,
@@ -24,6 +15,7 @@ passport.use(new GoogleStrategy({
                         lastName: profile.name.givenName
                     }
                 };
+
                 new User(newUser)
                     .save()
                     .then(res => {
@@ -40,12 +32,4 @@ passport.use(new GoogleStrategy({
                 done(null, currentUser)
             }
         })
-}));
-
-export const googleLogin = 
-    passport.authenticate('google', { scope: ['profile', 'email'] });
-
-export const googleCallback = passport.authenticate('google', { failureRedirect: '/login', successRedirect: "/profile/dashboard" },
-function(req, res) {
-    console.log(req)
-})
+}
