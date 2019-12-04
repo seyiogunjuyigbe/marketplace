@@ -19,11 +19,13 @@ const userSchema = new Schema({
     balance:{type: Number, default: 0},
     seller_profile: {
         skills: [{
-            name:String,
-            level: String}],
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Skill"
+        }],
         languages: [{
-            name:String,
-            level: String}],
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Language"
+        }],
         description: {
             title:String,
             description: String,

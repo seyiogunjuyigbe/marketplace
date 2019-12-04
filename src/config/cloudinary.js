@@ -8,8 +8,3 @@ export const cloudinaryConfig = cloudinary.config({
   api_secret: CLOUDINARY_API_SECRET
 });
 
-export const storage = cloudinaryStorage({
-  cloudinary,
-  folder: 'marketplace',
-  allowedFormats: ['jpg', 'png', 'mp4', 'mp3', 'zip', 'pdf', 'doc', 'txt'],
-});

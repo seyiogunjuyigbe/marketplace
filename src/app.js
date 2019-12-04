@@ -67,7 +67,6 @@ String.prototype.startsWith = function(needle)
 //   next()
 // })
 
-
 initRoutes(app)
 
 const PORT = process.env.PORT || 3000;

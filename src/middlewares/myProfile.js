@@ -37,7 +37,7 @@ export const myProfile = (req,res,next) =>{
              user.seller_profile.description = description;
              user.save();
              console.log(user.seller_profile)
-             return res.redirect("/profile/dashboard")
+             return res.redirect("/profile/skills/new")
          }
      })
  }

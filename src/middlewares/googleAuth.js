@@ -7,7 +7,7 @@ import {GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET, DOMAIN_NAME} from "../config/cons
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://${DOMAIN_NAME}/auth/google/callback`
+    callbackURL: `${DOMAIN_NAME}/auth/google/callback`
   },
   (accessToken,
     refreshToken,
@@ -26,11 +26,11 @@ passport.use(new GoogleStrategy({
                 };
                 new User(newUser)
                     .save()
-                    .then(res => {
+                    .then((res) => {
                         console.log(`New user created: ${res}`);
                         done(null, currentUser)
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         console.log(`Error while creating new user: ${err}`);
                         done(true, currentUser)
                     })
@@ -45,7 +45,8 @@ passport.use(new GoogleStrategy({
 export const googleLogin = 
     passport.authenticate('google', { scope: ['profile', 'email'] });
 
-export const googleCallback = passport.authenticate('google', { failureRedirect: '/login', successRedirect: "/profile/dashboard" },
-function(req, res) {
-    console.log(req)
-})
+
+export const googleCallback = 
+    passport.authenticate('google', { failureRedirect: '/login', successReturnToOrRedirect: "/profile/dashboard" },
+    function(req, res) {
+    })
