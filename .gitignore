@@ -3,3 +3,4 @@ node_modules/
 package-lock.json
 ./src/client_secret.json
 ethereal_credentials.csv
+.dist/
