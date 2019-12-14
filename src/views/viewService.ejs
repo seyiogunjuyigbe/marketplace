@@ -1,0 +1,45 @@
+<% include ./partials/header.ejs %>
+<style>
+img{
+    max-width: 100%;
+}
+.jumbotron{
+    background-color: #fff;
+}
+</style>
+<div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container"></div>
+            <h1><%=service.title%></h1>
+            <% if (user && service.createdBy == user._id){ %>
+                <a class="btn btn-secondary" href="/user/<%=user._id%>/services/<%=service._id%>/edit">Edit</a>
+            <% } %>
+        </div>
+   
+    <img src="/img/service.jpg" alt="">
+    <h3>Description</h3>
+    <p><%=service.description%></p>
+    
+    <h3>Category</h3>
+    <p><%=service.category%></p>
+
+    <h3>Price</h3>
+    <p><%=service.deliveryTime%> days</p>
+
+    <h3>Delivery Time</h3>
+    <p><%=service.price%> <%=service.currency%></p>
+    
+    <h3>Revision Count</h3>
+    <p><%=service.revisionCount%></p>
+
+
+<% if (user && service.createdBy == user._id){ %>
+    <a class="btn btn-danger" href="/user/<%=user._id%>/services/<%=service._id%>/delete">Delete Service</a>
+<% } else { %>
+    
+    <a href="/services/<%=service._id%>/pay" class="btn btn-primary">Purchase</a>
+    <% } %>
+</div>
+
+
+<% include ./partials/footer.ejs %>

@@ -1,0 +1,21 @@
+<% include ./partials/header.ejs %>
+<style>
+img{
+    max-width: 60%;
+    max-height: 70%;
+   }
+   p{
+       text-align: center;
+       width: 50%;
+       color: #000; 
+       padding: 1em;
+   }
+</style>
+<div class="container">
+    <img src="/img/error.jpg" alt="Error">
+    <p>Oh Snap... We couldn't find what you were looking for</p>
+    <p class="bg-warning"><%=errorMessage%></p>
+</div>
+
+
+<% include ./partials/footer.ejs %>

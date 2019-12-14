@@ -1,0 +1,29 @@
+<% include ./partials/header.ejs %>
+<style>
+.card{
+    float: left;
+    max-width: 30%;
+    margin: 2%;
+}
+</style>
+<div class="container">
+    
+      <%  services.forEach((service)=>{ %>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%=service.title%></h5>
+              <h6 class="card-subtitle mb-2 text-muted">Category: <%=service.category%></h6>
+              <% var trimmedString =service.description.substr(0, 60) %>
+               <% trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) %>
+              <p class="card-text"><%=trimmedString%></p>
+              <p class="card-text">Author: <%=service.createdBy%></p>
+              <a href="/services/<%=service._id%>/" class="card-link">Read more</a>
+            </div>
+          </div>
+       <% }) %>
+
+</div>
+
+
+
+<% include ./partials/footer.ejs %>

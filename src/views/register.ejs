@@ -1,0 +1,44 @@
+<% include ./partials/header.ejs %>
+<style>
+        h3,#outLink{
+            text-align: center;
+            margin: 1em;  
+        }
+     
+        </style>
+<h3>Signing up only takes a few seconds</h3>
+
+<% if(errMessage){ %>
+    <p class="text-center text-warning"><%=errMessage%></p>
+<% } %>
+<form class="form" action="/user/register" method="POST">
+    <input class="form-control" type="text" name="user[firstName]" placeholder="First Name" required>
+    <input class="form-control" type="text" name="user[lastName]" placeholder="Last Name" required>
+    <input class="form-control" type="email" name = "user[email]" placeholder="Email Address" required>
+    <input class="form-control" type="tel" name="user[phoneNumber]" placeholder="Phone Number" required>    
+    <input class="form-control" type="text" name = "username" placeholder="Username" required>
+    <input class="form-control" type="password" name = "password" placeholder="Password" required>   
+    <select class="form-control" name="user[isSeller]" id="" required>
+        <option value="">I want to sell services</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+        
+    </select>
+    <select class="form-control" name="user[isBuyer]" id="" required>
+            <option value="">I want to buy from service providers</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            
+        </select>
+    <input class="form-control" type="submit" value="Register">
+    </form>
+    <div id="outLink">
+            <small>Already have an account? </small><a href="/user/login">Login</a>
+
+            </div>
+            <div id="socialLogin" class="d-flex justify-content-center" style="margin:0 auto;">
+                <a class="btn btn-danger" href="/auth/google">Continue with Google <span><i class="fa fa-google"></i></span></a>
+                <a class="btn btn-primary" href="/auth/facebook">Continue with Facebook <span><i class="fa fa-facebook"></i></span></a>
+            </div>
+
+<% include ./partials/footer.ejs %>

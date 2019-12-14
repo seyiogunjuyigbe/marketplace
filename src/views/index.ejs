@@ -1,0 +1,180 @@
+<% include ./partials/header.ejs %>
+<style>
+    .row{
+        margin-top: 5%;
+    }
+.card{
+    float: left;
+    margin: 10px;
+    display: grid;
+}
+html{
+    scroll-behavior: smooth;
+}
+#hero{
+    background-image: url("../img/job2.png");
+    background-size: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.mb-2{
+    /* width: 60% !important; */
+    margin: 0 auto;
+    padding: 25%;
+}
+a.input-group-text:hover, .col-sm-3 a:hover{
+text-decoration: none;
+}
+.svgImg{
+    width: 8em;
+ }
+ #explore{
+    padding: 1em;
+ }
+ .single_process{
+    margin: 50px 0;
+    position: relative;
+    text-align: center;
+    padding: 0 15px;
+ }
+ .single_process img {
+    height: 78px;
+    margin-bottom: 30px;
+    width: 85px;
+}
+
+.single_process h3 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+.single_process sub, .single_process sup {
+    background: none repeat scroll 0 0 #3392cd;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    padding: 1px 9px 4px;
+    left: 10px;
+}
+</style>
+<% if(!user){ %>
+<div id="hero" class="">
+        <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Find a job" aria-label="Job Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <a href="#services" class="input-group-text btn-primary" id="basic-addon2">Search</a>
+                </div>
+              </div>
+</div>
+<div id="explore">
+<div class="text-center">
+        <h2 style="margin-top: 20px;">EXPLORE THE MARKETPLACE</h2>
+            <p>Get inspired to build your project</p>  
+  </div>
+<div class="row">
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/web-programming.svg" alt=""> <br>
+        <a href="/categories/Developing_Tech">Development</a>
+    </div>
+
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/paint-palette.svg" alt=""> <br>
+        <a href="/categories/Design_Graphics">UI Design</a>
+    </div>
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/stadistics.svg" alt=""> <br>
+        <a href="/categories/Business">Marketing</a>
+    </div>
+    <div class="col-sm-3 col-xs-6 text-center">
+        <img class="svgImg" src="/img/svg/smartphone.svg" alt=""> <br>
+        <a href="/categories/Mobile_Apps">Mobile Apps</a>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/graphics.svg" alt=""> <br>
+            <a href="/categories/Design_Graphics">Graphics Design</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/video-camera.svg" alt=""> <br>
+            <a href="/categories/Media">Video and Animations</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/pencil.svg" alt=""> <br>
+            <a href="/categories/Content_Copywriting">Content and Copyrighting</a>
+        </div>
+        <div class="col-sm-3 col-xs-6 text-center">
+            <img class="svgImg" src="/img/svg/guitar.svg" alt=""> <br>
+            <a href="/categories/Music_Audio">Music and Audio</a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="single_process">
+            <img src="/img/svg/search.svg" alt="step one"> 
+            <sub>1</sub> 
+            <h3>Find the service you need</h3> 
+            <p>Compare prices, review, portfolios to select the service you are most excited to do.If you have a specific question, contact the freelancer before make order.</p>
+        </div>
+    </div> 
+    <div class="col-sm-3">
+        <div class="single_process">
+            <img src="/img/svg/note.svg" alt="step one">
+             <sup>2</sup> 
+             <h3>Supply your brief</h3> 
+             <p>Provide a job brief for the Talent to review. At this point jobdone takes payment, which is held until the job is completed and you are happy with the outcome.</p>
+            </div>
+        </div> 
+        <div class="col-sm-3">
+            <div class="single_process">
+                <img src="img/svg/partner.svg" alt="step one">
+                 <sub>3</sub> 
+                 <h3>Collaborate with an freelancer on your project</h3> 
+                 <p>Share files and feedback easily with inbuilt messaging. Your freelancer will complete the job within the agreed turnaround time.</p>
+                </div>
+            </div> 
+        <div class="col-sm-3">
+            <div class="single_process">
+                <img src="img/svg/checked.svg" alt="step one"> 
+                <sup>4</sup> 
+                <h3>Approve Job</h3> 
+                <p>Once you're happy with the work, approve the job. The freelancer will hand over all deliverables and you’re done. Too easy.</p>
+            </div>
+        </div>
+    </div>
+<% } %>
+<div class="row">
+    <div class = col-lg-3>
+
+    </div>
+    <div id="services" class="col-lg-9">
+       <% if(services){ %>
+            <% services.forEach((service)=>{ %>
+                <div class="card" style="width: 30%;">
+                    <% function pick(arr){var index = Math.floor(Math.random()*arr.length);%>
+                      <%  return arr[index]; %>
+                       <% }%>
+                       <% const imgArr = ["/img/product1.jpg", "/img/product2.jfif", "/img/product3.jpg"] %>
+                        <img class="card-img-top" src=<%=pick(imgArr)%> alt="">
+                        <div class="card-body">
+                          <p class="card-title"><%=service.title%></p>
+                         <small>Seller: <%=service.seller%></small>
+                        </div>
+                        <div class="card-body">
+                        <p>Starting at <%=service.price%> <%=service.currency%></p>
+                         <a href="/services/<%=service._id%>/" class="card-link">Read more</a>
+                        </div>                   
+                      </div>
+                      <%  })  }%>
+  
+
+    
+
+</div>
+
+<% include ./partials/footer.ejs %>
+
+        

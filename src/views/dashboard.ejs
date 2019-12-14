@@ -1,0 +1,96 @@
+<% include ./partials/header.ejs %>
+<style>
+#profile h4, #profile p{
+cursor: pointer;
+padding: 1em;
+}
+#profile h4:hover, #profile p:hover{
+background-color: #f7f7f7;
+}
+</style>
+
+<div class="row">
+
+<div class="col-lg-3 col-sm-4">
+        <div class="card" style="width: 18rem;">
+                <img src="/img/avatar-bg.png" class="card-img-top" style="width:5em; margin:0 auto;" alt="...">
+                <div class="card-body text-center">
+                  <h5 class="card-title"><%=user.username%></h5>
+                  <p class="card-text">Joined <%=user.joinDate%></p>
+                </div>
+                <ul id="userDetails" class="list-group list-group-flush">
+                  <li class="list-group-item">0 Jobs Done</li>
+                  <li class="list-group-item">0 Repeat Clients</li>
+                  <li class="list-group-item">39 minutes Avg. Response Time</li>
+                  <li class="list-group-item">$10000 Hourly Rate</li>
+                </ul>
+                <div class="card-body">
+                  <a href="#" class="card-link"><i class="fab fa-linkedin"></i></a>
+                  <a href="#" class="card-link"><i class="fab fa-facebook"></i></a>
+                </div>
+              </div> 
+</div>
+<div class="col-lg-6 col-sm-8" style="margin-left:2em;">
+        
+    <div class="container">
+<ul id="dashNav" class="nav">
+                <li class="nav-item active"><a class="nav-link" href="/profile/user/profile">Dashboard</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/purchases">Buying</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile/orders">Selling</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile/inbox">Inbox</a></li>
+              </ul>
+      <% if(Object.values(user.seller_profile.description).length > 0){ %>
+        <div id="profile">
+            <h4><%=user.seller_profile.description.title%></h4>
+            <p><%=user.seller_profile.description.description%></p>
+        </div>
+
+        <div id="profileEdit">
+                                      <form action="/profile/edit?_method=PUT"  method="POST" style="width:100% !important;">
+                                        <label for="title">Title</label>
+                                    <input type="text" id="title" class="form-control" name="description[title]" value="<%=user.seller_profile.description.title%>" required>
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description[description]" id="description" cols="30" rows="10" required><%=user.seller_profile.description.description%></textarea>
+                                    <label for="rate">Your Average Rate</label>
+                                    <input type="text" name="description[rate]" value="<%=user.seller_profile.description.rate%>" id="rate" class="form-control" pattern="[1-9]+" required>
+                                    <input type="submit" value="Save Changes">
+                                    </form>
+        </div>
+        </div>
+     <%  } %>
+<h4>
+    Services
+</h4>
+<% if(services.length >=1){ %>
+    <ul class="list-group">
+        <% services.forEach((service)=>{%>
+        <li class="list-group-item">
+            <a href="/services/<%=service._id%>"><%=service.title%></a></a>
+        </li>   
+   <% })%>   
+    </ul>
+
+<%} else{%>
+    <p>This user has no services</p>
+    <%}%>
+</div>
+</div>
+
+<script>
+const titleText = document.querySelector("#profile h4");
+const descText = document.querySelector("#profile p");
+const profile = document.querySelector("#profile");
+const profileEdit = document.querySelector("#profileEdit");
+profileEdit.style.display = 'none';
+const hideAndShow = ()=>{
+profile.style.display = 'none';
+profileEdit.style.display = 'block';
+}
+titleText.addEventListener("click", hideAndShow);
+descText.addEventListener("click", hideAndShow);
+
+</script>
+
+ <% include ./partials/footer.ejs %>
+
