@@ -25,10 +25,8 @@ const serviceSchema = new Schema({
         cost: Number
     }],
     requirements: [{
-        description: String,
-        type: String,
-        isMandatory: Boolean,
-        file: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Requirement"
     }],
     thumbnails: [{
         src: String,

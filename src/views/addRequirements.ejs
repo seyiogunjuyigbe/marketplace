@@ -1,0 +1,46 @@
+<% include ./partials/header.ejs %>
+
+<% if(requirements.length >0){ %>
+    <table class="table">
+    <thead>
+        <tr>
+            <td>Description</td>
+            <td>Type</td>
+            <td>Mandatory?</td>
+        </tr>
+    </thead>
+
+    </table>
+    <tbody>
+     <% requirements.forEach((requirement)=>{ %>
+        <tr>
+            <td><%=requirement.description%></td>
+            <td><%=requirement.type%></td>
+            <td><%=requirement.isMandatory%></td>
+            <!-- <td><a href="<%=requirement.i_id%>/delete">Delete</a></td> -->
+            
+        </tr>
+    <% })  %>     
+    </tbody>
+
+<% } else{ %>
+<p class="lead">No requirements defined yet</p>
+<% } %>
+
+<form action="/service/<%=service._id%>/requirements/new" method="POST">
+<input type="text" name="requirement[title]" class="form-control" placeholder="Title" required>
+<textarea name="requirement[description]" class="form-control" placeholder="Say more about this requirement" required></textarea>
+<select name="requirement[type]" class="form-control" placeholder="Type" required>
+    <option value="">-Select Type</option>
+    <option value="text">Text</option>
+    <option value="file">File</option>
+
+</select>
+<select name="requirement[type]" class="form-control" placeholder="Is this requirement mandatory?" required>
+        <option value="">-Select Type</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+
+</select>
+</form>
+<% include ./partials/footer.ejs %>

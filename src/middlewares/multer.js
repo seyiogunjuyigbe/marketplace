@@ -26,4 +26,11 @@ export const afterUpload = (req,res)=>{
   
 }
 
-// export const
+export const uploadFile = upload.single('file');
+export const completeFileUpload = (req,res)=>{
+  Service.findById(req.params.service_id, (err,service)=>{
+    if(!err){
+      
+    }
+  })
+}
