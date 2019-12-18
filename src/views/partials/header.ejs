@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IXXO Marketplace</title>
+    <title>My Marketplace</title>
     <script src="https://use.fontawesome.com/74bce80b4c.js"></script>
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
@@ -39,7 +39,7 @@
           </style>
                 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                     <a class="navbar-brand" href="/">
-                    <img src="/img/logo_trans.png" alt="">
+                    <img src="/img/logo-white.png" alt="">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -81,7 +81,12 @@
                    <% } else{%>
                     <li class="nav-item">
                             <a id="profileLink" style="font-weight:bold;" class="nav-link" href="/profile/dashboard">
-                              <img id="avatar" src="/img/avatar-bg.png" alt="">
+                              <% if(user && user.avatarUrl == undefined){ %>
+                                <img id="avatar" src="/img/avatar-bg.png" alt="">
+                               <% } else{ %>
+                                 <img src="<%=user.avatarUrl%>" alt="">
+                                 
+                               <% } %>
                              <% if(user.isSeller == true){ %>
                                 <span>$ <%=user.balance%></span>
                             <%  } %>

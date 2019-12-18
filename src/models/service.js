@@ -27,7 +27,8 @@ const serviceSchema = new Schema({
     requirements: [{
         description: String,
         type: String,
-        isMandatory: Boolean
+        isMandatory: Boolean,
+        file: String
     }],
     thumbnails: [{
         src: String,

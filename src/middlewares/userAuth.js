@@ -28,7 +28,11 @@ export const loginUser =
         failureRedirect: "/user/login"
     }) 
 
+export const redirectAfterLogin = (req,res)=>{
+    console.log(req)
+    res.send(req.Url)
 
+}
 
 //logout Middleware
 export const logoutUser = (req,res)=>{

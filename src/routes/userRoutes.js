@@ -5,13 +5,14 @@ import { myProfile, createProfile, createProfilePage, updateProfile } from "../m
 import { getAllServices, getThisService, getByCategory } from "../middlewares/getServices";
 import { payNow, paymentSuccess, renderPayPAge } from "../middlewares/payment";
 import { renderLandingPage } from "../middlewares/renderPage";
-import { charge } from "../controllers/stripe";
 import { getMyOrders, getMyPurchases, getMyInbox } from "../services/dashboard";
 import { findService } from "../helpers/findService";
 import { searchItem } from "../middlewares/search";
 import {ensureLoggedIn} from "connect-ensure-login";
 import{ googleLogin, googleCallback} from "../middlewares/googleAuth";
 import{facebookLogin, facebookCallback} from "../middlewares/facebookAuth";
+import { uploadPage, avatarUpload, afterUpload } from "../middlewares/multer";
+import { redirectAfterLogin } from "../middlewares/userAuth";
 
 export const initRoutes = app =>{
     app.get("/", renderLandingPage);
@@ -53,7 +54,10 @@ export const initRoutes = app =>{
     app.get("/services/:service_id/pay",ensureLoggedIn('/user/login'), renderPayPAge);
     app.post("/services/:service_id/pay",isLoggedIn, payNow);
 // Create Service
-    app.post("/profile/services/new", isLoggedIn, createService)
+    app.post("/profile/services/new", isLoggedIn, createService);
+    app.get("/profile/upload",isLoggedIn, uploadPage);
+    app.post("/profile/upload", isLoggedIn, avatarUpload, afterUpload);
+    app.get("/logred", redirectAfterLogin)
 
     // app.get("/search", searchItem)
     app.all("*", (req,res)=>{res.render("error", {errorMessage:"Error... resource not found"})})

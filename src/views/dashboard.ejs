@@ -13,7 +13,55 @@ background-color: #f7f7f7;
 
 <div class="col-lg-3 col-sm-4">
         <div class="card" style="width: 18rem;">
-                <img src="/img/avatar-bg.png" class="card-img-top" style="width:5em; margin:0 auto;" alt="...">
+           <% if(user.avatarUrl == undefined || user.avatarUrl.length == 0){ %>
+                <img src="/img/avatar.png" class="card-img-top" style="width:5em; margin:0 auto;" alt="...">
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#uploadAvatar">Upload an Avatar</button>
+<div class="modal fade" id="uploadAvatar" tabindex="-1" role="dialog" aria-labelledby="uploadAvatarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/profile/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" placeholder="Upload your file" class="form-control" name="avatar" id="" accept="image/png, image/jpeg" required>
+                <input type="submit" class="form-control" value="Upload Picture">
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+          <%  } else{ %>
+                <img src="<%=user.avatarUrl%>" class="card-img-top" style="width:5em; margin:0 auto;" alt="...">
+                <button class="btn btn-secondary" data-toggle="modal" data-target="#editAvatar">Change Avatar</button>
+                <div class="modal fade" id="editAvatar" tabindex="-1" role="dialog" aria-labelledby="editAvatarLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/profile/upload" method="POST" enctype="multipart/form-data">
+                                <input type="file" placeholder="Upload your file" class="form-control" name="avatar" id="" accept="image/png, image/jpeg" required>
+                                <input type="submit" class="form-control" value="Change Picture">
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+           <% } %>
                 <div class="card-body text-center">
                   <h5 class="card-title"><%=user.username%></h5>
                   <p class="card-text">Joined <%=user.joinDate%></p>
